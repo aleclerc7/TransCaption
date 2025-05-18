@@ -1,0 +1,317 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : FI_ToolMenu
+ major_version : 30
+ minor_version : 0
+ type : 8
+ description : ""
+ subtype : 0
+ options : 256
+window :
+ name : FI_ToolMenu
+ identifier : 0x280121988d7e329c
+ internal_properties : HwAAAB4AAADR2sQzJypQPJ4Ka5FVkSN0JN5I8RCcuEsAJKm8j+C8wGi6ov/f7KsRn2px2pHqp6Wdc/b0EHwJzVf4r/WBNGv6LWauanNqfcxdMTPytRqt5vkQR6qj1jcOF1OcAEi7C5RFDPXXgLwuh3JNQaTNuQmYu7l+oaShOO9EeK7uk/rI/nPmJAA5dXlbvNiPLZHtfBzoOsxZe+NTZ3ZXBZjXto2pz5Z2eXqyL09AgEI1hGTTJro/dmb7IF2lKYxQ2lcwZQ1+y/y4AnkL+GqCPqXUM5ReFBfQ5xq5Gy8MSAhvJTFKLrjyAp65nd8fhxsdaE79vd7OWdn68z/tQI3n+Ezuthz1Yxw2NNZ9tq8OEzwX1K5Kcjm7S5NQJG0dU9D0lkc4ZkDZA0ete6ZZBTHfpdLckBK68yqoy9A42bVK/f1Wa750MNPqnM9DTU8L+lMX20K9TEr374xJ6QxQA65VqKcxGfHjoHsE3f3/Ul7JhoJHy/tgBJVG2frSyhS8ayYfJjgtWsbhFsfn/6QCNJlwEIH0JvMX3973TKitQapIDP1X+fWmwcjMY41vnFpEhn0Jn1Ovi2EBzSc04gcEcGEHxn+539gH4B6VCx5hYfG9G8eTs7ztT2I9I9XLsY18GFuugYV3ab3pyLX0WLZ/lkuehPRx8sPtYjmOU9UL7cAOFtUc4mk9Rhwzeo1jedm9ZknN8owYGtayJV4SEccYGTxpWUR4ODCG5P7d1WqhNuOFR4UrPXKlJa9OnpgIMWNywXAokqXEoWtjZ9yr
+ properties :
+  width : 953
+  height : 500
+ style : {}
+ controls :
+  -
+    name : FI_ToolMenu
+    identifier : 0x280121988d7f329c
+    internal_properties : HwAAAB4AAAByqXXbX78DC9dy45d6RfJ8lLUXSN8cG8HFb2aTVcAnV/PBH10etuoywdl5Wkeh6oudShkCWz7KHk/G62aI4PphEVup2Q4MWSrf5a9fpVXxV9qNVtjeH3fnzEb3MRMT6BapH76j1F7BfcJdz2d0DuHDqjgt/6f2l6qoMiFOsw3jT981GULwnOHtwYLsC9dQlFr5QzedWTC5PfFVH0bbl+gRYlza6LeLuFslDfCAFTqSKICDM1Txgc0boXTp0VAmxoa/JijarkaqqWJuCPk6CJu1epBNQlXPUlp5P2Mr48oJL2AEwhbvrPlHe2ZGyMHCPw8sTAGkKmpUaT0s+iN/8zmATY+1hiyI8CCFPe6OYJAb+J5K9ffu14FgAuHxhSuycmIJzU+ZH6yyziUbuJHrwbtM8kLtVWZkztYwo7rXvLVWFuXoTyG9RR3XC5aynnQuoqEBtC2ArbwlfcXWThU=
+    properties :
+     width : 953
+     height : 500
+     tab_order : 0
+    style : {}
+    controls :
+     -
+       name : BTN_Work_with_a_Subtitles_File
+       identifier : 0x280121a58d8f66bb
+       internal_properties : HwAAAB4AAACSsv3pcWnztAQBOnEIQHo9pavSG9etaoM7X6dDPPAb9odxjg1gvojzc4TkwGpSrWQ9jkEa2bTJZtnqUlVjw8MkddQZoGHB2o3cOshxqbkR36yqG+//UM99akH4Kq1+1I3SuCrjXFoW8aZXUYUMXsuES2T25AU67dTbjm+iUDMtI8nyHAXkEgpG1fAjs9u6N3ZMYswQPJRkXAO49MFpuzzQflV79+/6KL4Gn1JVFhAZSr0aNqZEQ8OXzpRN9ZylPs+H5ipNYgdFytFvezASJi7uf0l082g3MM59xI8IWiK2xsEQL3sYtEqdKTDmNdW5bOQ6pNSAq2wWrMqaY+ffEYatMCypD3tE7w6PPnEyPsr0AXpebdsWrtuPqZtOjq+o3YGwFA/n+XhzN7Gk5oM/2KvcKsSXt/kdteBmnDEaufPLK2MSxuR+uNF1dx8jvGGZJ8NFOxZS3JFgC9DpUZYWjtV8m14zHgPskAkNurtG9J3Z9tfU6k6TZ0OzrAYQB62SHSGmQkfzHrLcWixod0ma5Zy4Ru7/mZU9WbH/TZYt5Pz+G14gKl3rZXL6ljfJqziVWeGPP4HPDbpf0ETcqXmBvCYHcCWjMr2Y031zFqMFR7VvPoC1id3qL3cjjlZc0a2PyqEjdrfnozxI6qsz0EtV+2hqdqMhM+oKKejKstuMRrjkcDNGsb3XBqtUg5FQD6MPxTYsLI6uUiWlMYSM0e/N3HnBoG8g/uwGNPWPFPltKaRkxIQqEvO0UH1Us8c1JD8YqMW4a2dUnRpJ7Q6dzdRIMYPw2jiBhgzSPmY7hKW0mn5vRkqdgxJZ2v2d+OdGbz9BhTRB38wZJ/zn/dATCrjtFwltGSvRIFG63THSCc7CEq4oQu3tbpYFAEscOAAnowxim2bnxXAnKRWFA2kMK4vrqvVKBGBsNpOcAQllARDQOxoV9feVl49ljKlbmv0zrWk3nJudyPxxmqrDgBoK7cl2R2SSUxvYJZWGfP7FVGMtXBiLeXxaeSHejvTcjARFC1WmNU8gD22qdjLnL/7tWRvs6hBXx/ToZrWCogwAZnhu4RbQY6ZOfITX9CGFU2KRvYDtDQXnJ/zaM12A2DT3owFSkYRJxzhcAGJdkZ3VPwMQyh22EPlGdIMTVKUHRHk+AblH0pnRXCtYqz72c8Y2jkj19bdAJ1/AoV7TpiDJ1y5ZM3IIKPAVURtTYic0mOMfTjdowiL3jPhXQSVk4sBO+b+5pK5gBAub5PPA0yJJiA0CWaFIi1Ubr4zlqxX0zDSTKB6J+ZKZowkxH8oxHZtmwimpnjtCASGH4Y7qIydUQ+1hDZlDvY8yBh0H8cDr8ju6pi3dZEapRIlZABOc2mLMT6/1BWcDxvK/WSmus2Mko2SO/vKHQQrVxfADIvZ2cutp2s/88IOEZ0QEjOxKwTDUmJZ7iifG/PU6k/SgTSCq+fzRQSPsw3IL6hLwmQQWMyZjYk/eX1LDPjjX4MkgIemojVWt8CtFbNB2ZFtGEPbiN0P9dEO6KtGIqnRsdQ==
+       properties :
+        x : 37
+        y : 65
+        width : 260
+        height : 61
+        tool_tip : "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang3084{\\fonttbl{\\f0\\fswiss\\fprq2\\fcharset0 Segoe UI;}}\r\n{\\colortbl ;\\red45\\green45\\blue45;}\r\n{\\*\\generator Riched20 10.0.22621}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs18 Loads a subtitle file to work with it.\\par\r\n}\r\n"
+        accelerator_key : 65535
+        tab_order : 0
+        markdown : 1
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            ChangeFenêtreSource(MaFenêtreInterne,FI_Subtitles)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : BTN_Text_translation
+       identifier : 0x280122018da2cd41
+       internal_properties : HwAAAB4AAADyyHRM9LKgW4ULT0JqNWNSu+WHbvlAQDXZQ9wVH4WA+sk3HbI75RY6IIFaYjk9Wto9Pe4d51FNg06Gw3oZt/3hr2yYJmQ8Wh2B1jjGKZPCrbX8bYevjiIP6N/Hi4ObDZf3jh5jnCy7nv/Y/dRLwCWT54TRVcuX32XNsL5iYy4abYJJ1IxuTQdk5v+IuhPmhuVC30gLYfFJ5gwuPCEFJpmdxLFmmgKc1CsdYDU0RQmxSl7f1lXSClDH0dIpFyl7ubYLz9GFx2AHRjuVGNtWEnhStjiE69SumGhf7klOMySH6VEunjnyllFlruJK5YeX+VQIAY3JBdSSfYKr71mHmhAbxgO6z9vZQ27PDWwaJUlCoAd3q67VrTcCXJA1L8rFMFTJ2Lb+Hkbhv+fQiYfoqYEAjtdrm7F9LpiRyb1+Ky1z0EsSrZKpQ0Eay13pabhHd2K87kzXBQCpIJ4OnOiJwW7zQilcQqK1wrD7BD8EVb9zjw4JgrY8fNOvuVJX8N0k2jDzmBoMpJJAxMLAMddkW8Sn8ehwAWkWpjfHAvVwjQwOZACwJa0QFgO89mIblb52dYT8OkuSI1tsiIszz7CDe/G7CjHid3XMboGUjSV9T0sXJIOwF0zDQLH1OkljNCphZ0t4mu9mVjk6uVnJvb5L4oNC3v8/2AG6yKSgBxgTXFdgskAwGs3zbzlqg8dQphadOrZoQCezahprUvdcVZCZn4NUrkeCZtlJKdItebaRy5jrFcah1E2reY1zHvfcL1O0ZSkdUujIf3pe4MB2+8FMR6a+CwfULLw8M403J3OBXkTg1rf8VhSh0Fjmdl7wgnn94LA8cJ89Kcz4LG5iDu8jh1xhJnbqXqGoWLp4iLjbRCbhUgxie1SNSEa55EV9PshmYkjOoqsFbf8+qjFrlcwlWCaYzX8ruqn29kxb0ArbvSTYm8Zu/tFZsk6e8nSzwlUXg2NAxdnJyBLm5exzd3bSJUsULrj5Oyk++Q2Ts/G07Ky8l2fzrEFIIv/57lX9us3k8mGdArze7PQ2TCSSEWIENCUBkll5EDEOoz8U23RvC7I/LTcZgf6LGLyuURW3mhw4zexVc5LtGIbk/A+jxvH7jnygt6IIodEK02/Ot/RAaTAuJw3EDEju8etNhSH9Ofj6PmZhbr0TNLc8Ca82sSruzO0ZdY9kaqXo5rBA7YEXypWQ2Q69sbzSzRGeZck4AvLR+vvhVEBQMGY+XEccrJ1oPai/rgsBuYYLTSyIJvDetmTmDqFFqeVkJhuqVT4i7MnMRT8l6Q3OEt8daQaAL1+eZXcdSR8RIJPPc9c5v7bBfkJbNm+MPoiwHoahWx0H9mSsrrXtvp1qucVCGGt2y8uicboz1y/sT8IXeJZEKJzZlEj4ZwtvOV/dIkrONgzZ31FnSIuFkFN5cEzb2vKbT1JyGfELZs9vdMffh82ADz7bnbSp4Diztdh+tT9tE8k0D2vAi3LZVNrncrG6ErXPwoP/4IZykP1x
+       properties :
+        x : 333
+        y : 65
+        width : 260
+        height : 61
+        tool_tip : "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang3084{\\fonttbl{\\f0\\fswiss\\fprq2\\fcharset0 Segoe UI;}}\r\n{\\colortbl ;\\red45\\green45\\blue45;}\r\n{\\*\\generator Riched20 10.0.22621}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs18 Use DeepL API for text translation.\\par\r\n}\r\n"
+        accelerator_key : 65535
+        tab_order : 1
+        markdown : 1
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            ChangeFenêtreSource(MaFenêtreInterne,FI_TextTranslation)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : BTN_Document_translation
+       identifier : 0x280122108da4099e
+       internal_properties : HwAAAB4AAAD81P9ii4y+8CMsxYMaBtOGgUNgH/x04602Arj9XokmTmSvfQgGSVZXpw4z6zGpwxoJWwUqz7rDjq+Oc6Yao/i8e+DWVFA0EjgEbJ5TGmgECWCGT7G1CeqZQ+IBjaF0UQdT8Cy3QAoUizwAvbGCqXjiDtTxGazP7s0m8/28HTurMHEHboLjRs1ITN83gBxpIpLj60r6TSAR6aL1Wnq8+sQ2QWhZnqiPCaZghuUYWDx22vwEO7n4BSq6Pw9ZzVVQOc/Y96E2ltc8jtG2oQE1te/AZIBXiV/86MEra+1ygF7+MxbJJpwDa5XbZa/fz18DJK+rWxT8Kr5pcC/A143RqyRBpEU0ujIWfXhwJ8xae5muqSsU4dlJyKyGNKQSV+BZ+e2Ww/FraPmyl2pBOnEd921RwaDLZyKqJ4/qfViDrfVu5ToFIHhLwal5Lv4RSNvKm3/78HxrseKGoWIYC+PJYdfR69Xmkt8SP043z3Fuw6W5abA7CX5eqTjdlFuQhfqWdR1uBjLT6NonXRurcpQexHO3awXEU5uCAyLrjGhb52kesQYswrMvxtRSHdVIsTceeiGxV7dxQE1LeTsnSDGAAVt0fyK2z5URDOSzMUo0LgBv36kHhJpIeaD45s4IF2bszWmzdg+F2cfyBJF0ca5HyO5QvkDX4nVvoKNN3+0553kebDyJnYH4cttLi6qgow8Wxdp6J95u+MBpiHpw39mKmIKopGphwwSCFgIJdlSTcc2EB2YG/2a1IvfhRMnIkPy6OTGakRtb9rGz83oAKemWBuIMeN2on4buPo8nfQJvw9srHQAMwI7PWFFxqb2rdT+M3xrUAphGE7HUrK6TS3ks7KCHdt81f/sJJalI2tm2ry3uIDPjCrJS5XbVm0evw4m4q7N46SaCPt4L8fYlgcxoVMKSjPBisrhZL9yjyt3X7BtAdy23X0xH8rMtnMqh9f8uT0PRaxpP8ECBig1WWMBFMaD7yh/yqEORlaqE2J5SI1u6lQidgzZ6OkaYuyjgBuisSgKjFT+I0U7PVAvN4IoIPVGt7n6AyjVkVzu20yjxFOFd9wRA3Az8GhEEo58nP7GGp7IM3rdxaRbWEJ/nuyKoBlUwCQHfs+4jrTO2Q3ktGZGfxZAeaP/OB+IEzJ4gSwPI/LoKq3MQNpjUUowjhfKnRTh85xHf9RM9pzthORHgxjddmXuleJ3ug0Hsszu252f9C31+aNUiMvIQNhYO
+       properties :
+        x : 333
+        y : 134
+        width : 260
+        height : 61
+        tool_tip : Use DeepL API for document translation.
+        accelerator_key : 65535
+        tab_order : 4
+        markdown : 1
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            ChangeFenêtreSource(MaFenêtreInterne,FI_DocTranslation)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : LIB_Subtitles
+       identifier : 0x2801221c8da9368a
+       internal_properties : HwAAAB4AAACV3HAJg5gmSdi8b0H+QjA7ty1okf9najv8fBEZ7nepaJ1hGY3yUNvb27bFZzSb5hNXLb8fZKY/9LlwAofKrIfR15dN2fEWMGQqd8hRhEQyA6xydH15393I3Yv1jNoOB8i72sUCCLr15IGkgULWoBjw1ibL1zfz2wgIryiFtZWqqBV/dCbOXk55FXfhME3bRkA5YmV5R6d9dbpPtSrUHoX9bjcGUpfSA44So4/+/5zlLWYOV0YQJe7hrtW8gliQS7cM6WwnsULsKzFBl4N+CvfnP28ToSVOjD0y0nhp0Pb+DbzF2rmzJ1FWXktMu9bRfX9voXjmmjgpXLEHvjCLXrkYdheVw3NMl/EHPbUUY3D/YmknLjHhQFHclHkl7j9LclN/W66fWQxg4yCDuDe+LLPsYoq7NbS/PoTVtiGAPzs96B7lEa++4+j35X27TtGiIkvLReoy62xUu/U/voTqZskpHObFvZ4SnR6tnp2LOpXLGWZd+Wb1H/idt2n/FIt6XlFDXjPYmBv2VNnI6QRbDpjJ2YriNwVAD2uuEKWvrpji
+       properties :
+        x : 37
+        y : 31
+        width : 260
+        height : 26
+        tab_stop : 0
+        take_focus : 0
+       style : {}
+       type : 3
+       code_elements :
+        type_code : 2
+        p_codes : []
+     -
+       name : LIB_DeepL_API
+       identifier : 0x280122268dae5f8e
+       internal_properties : HwAAAB4AAACvjNK3KKwxJvPozRgKBTUx9T0SxHA2Axnt+U/8kZhEUgqusmwHqLPLHnwwfBbeE5Wk8UuFnRkDAch8Qt2XK95dHIKpnuQ+OPxI64kxJxOO8VNr+KAeWv8ee24qHlRTpI4GflhNWN+hfNmvegQlQd4sMJeu3keAY99EA6Z1IQ4OYOWk+4kv7LszOOwNEMFQsx/LMDF2wEAbhtrMvU+Ei4T5EP3I4K7AkhHzCSR7aIH38KC584uCKNFJYn6nznqY2chFq0l4kp+jnq9X5w6I6tcRsTT7tednZzjCzaJMNHy3glwW2n3RyFSj2PqqqHJ3NLwTjIg6sI8kGcuG7A2P8BpXzC7VBx39Bn415pGDIawcZbOu1OexI+StavLhn/GnmdyvSHrvd+2tpLT8dIjoBA6HRjcDEUakWUF9ByEl5Y8AB9LC30328LWCBawNZ1n4Y2zhouQsa5NHjgnAnkl2tNAe2tlDU57ROMNlB8ki6Jf/Xkx3DLgLeWaJcNU7O8kdRkHsrBVZwCBFIpjDy6ycY58FHrC5Cd5YHi9IM4mMvjmeoQ==
+       properties :
+        x : 333
+        y : 31
+        width : 260
+        height : 26
+        tab_stop : 0
+        take_focus : 0
+       style : {}
+       type : 3
+       code_elements :
+        type_code : 2
+        p_codes : []
+     -
+       name : BTN_PrepareDubbing
+       identifier : 0x28101bac546e207b
+       internal_properties : HwAAAB4AAACGUgTNwjpkftxreakSCZRZ8IGR8hR/IXemF0aVD27YLdkrpoX5MPldu/pvSkQMc+AOWGotE/guAfvbYc8KnrwzE5Z5eB6FwhE8CDOfq/FmkHsAUH48GlgY7dV00UNO5U+ux4eBIKRn+MGBhwQ7e1TNes3kBJjxbWyygPMsdlsHc6b65V5FuyqJETVkBUrjgwH2zSw6MniPYvdUaS/rmysVG6Me6AOcoT6tCIQb9XtFdLkNNk14eR7rkq08uPLmn/YPhe2dcrMl3FqI5RApRjT2vLoJP1reDB79qrzFgRTV3AzOpNzizP6DwVaxJ3V3BRGZQQlyB5cqQ6Pf1M6C/IvDgo3sXYrUv06x8LvRtwPtCePE1FLrBwav3Bb1i3Apy59rz30mssKRZfXd0an7jhGvc8LGNeWD/Q82QhOqyUSdF7LELdjw6/6HqOJT82k+KY/t5yHPBNVqeJDK8TwDFZE0bheHfhwI6+oGEhdMFQBMhxuUTsO1qwre2WOjM2aAnNJa2qwII54qGO5c8RrCFCkJatWB0k/ueS1xWXoNXk2sBByNTFP3P38J7h5kcJHr4JCV9s3Y6LAfRNEqi8Tt/f+60FRG759qeF1mrVb7fUHSMTLBfCyiXrVGSs++oh3pWuxEmX+KaYfUjSEOx4j4UhwzuNY7fkgeTVPUJ2vKvLs4R4plHl3PDx0tj8/EtpvONLQkJ4ErYSZWxnAOFNNyNaEpfL3RIIkZG8hh2hqXDcCE2Z5Kb1mXY85O0NAY1JEIsL70fUYsjTWRG/VYo/MkdEn7ZXwD0QxpdhEE3XwhC56oaHQ6fWziD1jB0BlbnDgyulgUI7opXbqE6wolrMvcJVlr96OjUhAoeBSLasv1ZOGUOMbOeh/L8A9HJfv1fMy2Gi8nG3HqfjLujRUNSucS3NfFxQVnmnDkF/12Y4uaOsrPQcsiug8RuGbsfJHqHFHI3FOjskHekVT31bTxUWeKA2yXi01+3v62xT/6OTuBRLfE8yiMV7BdpYPQxdcWG9qCuVoPgmL8MMuANt/kcssrSAnu6Lmi09X2ByJQTOoqCqaKBwZmIT267MoVA9LHLrOdOV+8/CA/QcjbGfcCeYS8QhzVsJhKg+JjthFW7rMKqKiF4eyPnxizgN0dksqws4LLD+YJ+q8fFLqBtNNqi6y9CZTByx1Dy0k/EmPYO4QgB/SFc8aJbjvYozq8rOzk5cqpc3kWfX+081Yc9jlHg51FM1NpYz6vJR3+/a0yofc+bUJVi2WBM2wtwV82rFyZSbO49d9QHcX+g4hK+X3gEatdI67sxsbCXcsw9kRP/32uv4o01GR/eNBsKbSJGE+gjcfubTlptYq0CJAXbuXxCFcZeNIeJA17a+0Zxe1Mlzy74gnDvSl4kBfPUUM/7ZAQIV8qfHk/NHTJMEQS1iiwRXOJXuIqkVR3UK00DXWHoj9d5UOVdO9yknZfYRL5+17z5THP6JlLA6mWx1toYNBYkZicqpWzqg4q2Ly6J0xSFqum+DKsjuJxmMqLiR5S237B2CBQsGDO6OIz71g6Uq67FfMZnS2dtd/uBQGpe0yUsUQW1kJESpb6Uzz2TBQomF3BBToHQRXblx3NnVnr42m3Bch2YWsFR5knC+9lfpQJZsan0JiVFO3ip2BCiChsGYEmYWvIvxXQkO3U29gvJWY5njU=
+       properties :
+        x : 37
+        y : 134
+        width : 260
+        height : 61
+        tool_tip : "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang3084{\\fonttbl{\\f0\\fswiss\\fprq2\\fcharset0 Segoe UI;}}\r\n{\\colortbl ;\\red45\\green45\\blue45;}\r\n{\\*\\generator Riched20 10.0.22621}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs18 Generates a CSV file compatible with ElevenLabs for dubbing, based on the selected subtitle file.\\par\r\n\\par\r\nCan also split video files for big projects.\\par\r\n}\r\n"
+        accelerator_key : 65535
+        tab_order : 3
+        markdown : 1
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            ChangeFenêtreSource(MaFenêtreInterne,FI_ElevenLabsPrepareFilesForDubbing)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : LIB_Other_Tools
+       identifier : 0x28154b14e74a7685
+       internal_properties : HwAAAB4AAAB8IEnVyHabLRWmCoCV6L9PAD7k2R53/NQTGHKBXhlzkrJJCVNXs6WcdKG00rmElNoODhXLT7RJGz/62YHrLpCz99Gbw5/+x/IYUbMySDAwYqNAqum53icxChtgfI21dfp9+93yDKhQl1PLuZYQmi5TSjcfVO9PGvTRTtK7r+xtibfaIj/Zqj4wGa2JLXUUDM3vK1UEZ0K9Q0UZctTp3j2L1XOIhPIBp1wnJ5UUEo85VRmI9jrDhzBl/Qrs8Ifo2aSGH/aJEB3nyJ2m6UoV19tN/aNuVoUXMhpu9FWtU9FHKcLjacqlrsF7gMVJ7aOa/uErx2kldkMrFbFBMSSUnwKSggnuauutW4Lth5aKVOUWRJEvcT4fm6ndhAckSNBMl+GDC5Estyemjg4VU7236VQskJg69vJKUIu3nopAwlaKuCyF3hIgGEBcp5kOEphFeyc9IUflPSsqjiEDM/AhrfTZAsZ6WAYzQ/0z+iWCkGuC/CHtZlurhdUHxMS9hZdLu1V5dW7YO2n3R1+G3XVaTr+UFsvxpWtw3Q2XfJLzjws3KwnN
+       properties :
+        x : 37
+        y : 256
+        width : 260
+        height : 26
+        tab_stop : 0
+        take_focus : 0
+       style : {}
+       type : 3
+       code_elements :
+        type_code : 2
+        p_codes : []
+     -
+       name : BTN_GenerateIndex
+       identifier : 0x28154b14e74c76a4
+       internal_properties : HwAAAB4AAAAN6HWwxjjcXlnBoofPWycPhWm+8gyjzNVWG4WZstFe0ATI1bL28yeVyDRwE/L57M0RJ8GoQeKTpO4JVHqFA7YsSDbfpNPGSSqchauUe4183OEU5UpM2dD/w6W2dPiZCji4II3/QJmbVLkyH3WbYiheI3HAU2E5512HqJesIDDn5dmRgI+3wHJJ84Uu5XjIlTE3Gqg4cgBi4YO8uqBEdkoXIseHy6CVOGdUA8htSQ48tAum1xwgg5Kz4EtraRAJE0CPSibRYG93sJYy7FRJ6Aj4p8UpbHviCRYRsuCmcFCAOBR95FB91w+ImwwgAYm/LCer0bPM1xAEPo72ZiYsBCNAuvsUghnvc6r2rtfunq5WYPOj7IFGK2iSdsdLVdtrMkblYfhd0f4Tr5QyW7HAFDP0R3Xn/XUyK2/yOUq/TWOuc7HqljirayEg1H0vcw+XgBhSL2Mm03MABLpFbLbtHtN4ngwx+PjmaS5kjXwH+xp67ipyZAqsZBus8UQ+Hm2/b7TsGvi5DFLEMeYdmX2yO/8OV9xjS3YSfRTVUhE04e7+7E96XeMeZC90DNOdMu87kdn64DbBYT9593jhl8Zo6e3Sq1lJvMI1n7dx68Th7ze9q6ZDcnfUMFsEspRUieVvKdGybCgZLWZads3pCNCp+oFf+bVwCGNEOeDys7yHgFCwNm0pADS6P6/1XipII6LuwkYW/OdPgFXjaeQZExa1fV14DX0IiG72UwckuxwjofuM2NSw+CvG6z/odEPNjg7LBkcR4+uyFJQ7IDD6eDDC2xQwuHGwf60L3Oji2mbiHcliBlnL+MeBAoCZuGrwXUlzOCU5N1baa6PV/OcPpAsdRROYztRPDfTLlivULyjqUI1BcA6WQCsbuFoLsKV2BNxZUlIE6lZplsL5vW/epDbSLz0Wsbc6s8of0/yeyklBxRs/Pjwut4uC81AGiPPdQS/PgHliuLXYTExTydU1Ha7WGu+bjeuVfl9AUiaWobYaUi4nZ/9v0nEGHw8NUgnqPyXmBI8nx+Zf/6ICT80gE+HuwNWLuXtT9svUfNxsA2miRkOPM41BDKAbHlqOvZyVni5Ji+AO/wh0UsaGsnEworLOY3Q4m2R7J8zqD2JnBaBFOW1fyvhGfWi5juOkzSAj2A9Zil1XiOTpBzJ+Kr2VRolqbp5GX1z14QPo65vhRCGzFdXKaew0+xHby04937s7W6gxho1R/tOfPSSD+VYk9WKprtK+e7ST5kl78EHUxWscnVK5MzyqeagXBbtl5ZP8X86VkvmWou76aboHy9V0HhaQeXQJebexzce2Rk/bO3/6D4VOBVc8d2cEImYYbGFu7m7VkB4CXXkJPwY85ZJJahpYZB1wdu+e5fKL96abMsnoF0eQ+ly3UhDkHbN102kT7A8Scd60JOG44HOaBJRQsrbielxf2E7DVy1OBgq0EZbaGdGWK+eFlFy6VdGPK3dw48HD1tbJxPajByCeQY41IHDY9wtxkE9usW0jdrnG2aROU9YDykegf2+YQfG/IMvKrNywvG2pJbeXiiFLxFOn9JePJ4wyyKNKfoo=
+       properties :
+        x : 37
+        y : 290
+        width : 260
+        height : 61
+        tool_tip : "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang3084{\\fonttbl{\\f0\\fswiss\\fprq2\\fcharset0 Segoe UI;}}\r\n{\\colortbl ;\\red45\\green45\\blue45;}\r\n{\\*\\generator Riched20 10.0.22621}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs18 Creates a timestamped video index from EDL file markers for use in video descriptions.\\par\r\n}\r\n"
+        accelerator_key : 65535
+        tab_order : 5
+        markdown : 1
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            ChangeFenêtreSource(MaFenêtreInterne,FI_Index)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : LIB_ElevenLabs_API
+       identifier : 0x281e087d03ee58bd
+       internal_properties : HwAAAB4AAABgZzbIKdiGYyWx1X9LZQOo4zvTdrrjZB1jgnPXMtu9I2Vj2byc8CDgU6nahndpoGRl8IHGGnwSVrzfxH/Rkg9EHmynAxkvemAJLmPcXazPtNhl3649WHV7lUrk5H3n/ftgHAwECGS4PIF8Y0rgysS0egZUYUHnvbM0Li8jQ3HBB9wgYtdqMaC37sTV/K8D+gVhnXwnkRh3SFS0FBruIG0EPG6QdoNzPSAHOxQOws3SHiD0rHfkP06T1UGX5s4d8mEOvTfU1PYsTretoq5bdlNvWNYlcwMA7NRPyhdJPW7yjpX/echira79Y+bkmR3J9/IvYOZjX0gBlaax3H+unrKu671Sd+dFUJw4Z5Q/cs9EZZ2xWu4ks6FKVu9V6A2fK5td7eh/RRSNG4aSMWcaGtJhQJ+gmLVakJb7XK8Otn2hgfxlqQ0eR8zChvuw+4EtaVELf2RicaJ1YXRVw/ILjRvtVixuQam3k4sXOuBSC7goErTjvXAVuST43KdlBUJzqRin4qkD8BGRyL3dJh5tXLkR/tMYgQaJnI+sYByP0CbWjYgsehjX/A==
+       properties :
+        x : 629
+        y : 31
+        width : 260
+        height : 26
+        visible : 0
+        tab_stop : 0
+        take_focus : 0
+       style : {}
+       type : 3
+       code_elements :
+        type_code : 2
+        p_codes : []
+     -
+       name : BTN_AddCSVDubbing
+       identifier : 0x281e087d03f058cc
+       internal_properties : HwAAAB4AAABz2tShHF9wEg2Z2gHEwFQdz5TDdNccDdkBy3hy4z1oiI0sSjvma1CzsqhsKNGykKuNkX9WhEPLNFSSK840Jdt/9IvXJ0tcQ/QKJ5HYrOtg0hCMfE5Sl1QmL1ehNnf4HgD1A3VXVdjmt15HbbopQSlsN2x+JzgKJ2A3aDpYps/3Y2QG+XFKkehKpXwkvhB1Z6WB7n4lt00O48ves0nUlSypP15agk/sVMCGL5+V/W6ClAY2R2NXiSxIqP56BOGs9dm3Ah/h1a0XvD02bGyg3cEm/CvEBdo0vF7hexB2DGq8jceA+O5p3dAy+XtPSN/eSwsFIbHUvrfSSAtIGJs8PNLvBAPZgUnWwUUHc1hnaoX3yW93nTsKpPuMbXNnUK97kNva2VMcqyImsALC8+SkvJA0kXi1C57ZDh8UE9BlTbv5CfA+cg0nT1c6oUk09QTDWJHpycOMJ0IpQcAqXoxTNw/2pQzl/iV5OxTzoSLpkk6uId6pYGzkz6dr0Le09kam0wz0l5Xl1ED0LPRT1lTY/+7DcNDKY3t/YxcP4yf3y+FGMbtpfYXFGp55NILXbmyblY3srwYrsmNDtOmWgLS3i9+Nt4pzWvNQOPR++iSBsMWvPZ8UvUB1nqJvQaJF3KLbIBhON+rOpqSu2FxBFVPtyp3zXiAa2vB/2lj03fB9+B8WABnG02nuF7xMcZM4+y3UEch5Oef6Xpyr0S0FcczdAT8iG2a0ClRAJ1JEHShMT0XFbsfg/ZMCPKhiHpEjl9SmRYM7KjKwP1Taa4+cpXNT9hEPuScmNQGPV+BFD4FvK/1i8HDl3MzjxNM28lhhlAtb/j2Doy9x7On+ZFXtDotXBUy/L9BHbGYfwnEv+bbUt+e5c4YoRx9M5jU5hjCzZDwz5VxlHboM2fpEHCAH40i573hfNI791h2x0Hl2ZmZ0JhS/ZcPWyu65BeQJYaTl1wq9tnNM8zg72DMUc8OAsuF+VMVxg/vjCgw6b5g01ECavr0qThGpE0AFd2Vmo7LVDeSaFTZjuyJR9UsMNzG9ElTBXOGgCIiHaRDotttUY9/XDryH7Y74iwBmyElbBlTj+bbuK/Tyr9BWJ8MuggFzz6cMPm7cf4aVA/Vv77aDPvfe7/674tDIJwy+6Xs+a0tga5P+MMtl4AyjbHXsdgGcybSgXwpAaShxi1BBGVupl7IoWVgw2/6I37tkjM24XLtJJ7cTLzjaP8QUnzjitEUmAe4CVMepBP/+BU19VcRjQ09q6jTYJsFpGL9FaNGxOQrBGo72ZheUUmZw3Gv9KXeHs4dCdOhVdW9h42DXKEdD9O5TUSjuubte+RdH5cLo9GrJpfrwFk7ih5OJzMvH2lMI921pr8cQxv2c3AT1Ru0t3FtWI6CYylTG+blEHV+2PbdlsPK8uHzQgHeUvCSio9w9CzqxM1KtNltpP5Hkh7ZUmEMGH/0HMLfBeH1+9U+3MyYk55T+BtWKGaJtNiWpMr+8i+vxFW2y+REYuzmmfMvDqCZS/5/qxSBv5BuoekjPNVz4956ZgQsZC/p6Oi0mtaY06MN+q0fwdo/G20D95GzYfjXzWo1sUhRw+F8j/EeGbXqcc5jf4KNL8iwtxF4Is5bUO8iIfoQ=
+       properties :
+        x : 629
+        y : 65
+        width : 260
+        height : 61
+        visible : 0
+        state : 4
+        tool_tip : "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang3084{\\fonttbl{\\f0\\fswiss\\fprq2\\fcharset0 Segoe UI;}}\r\n{\\colortbl ;\\red45\\green45\\blue45;}\r\n{\\*\\generator Riched20 10.0.22621}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs18 Use ElevenLabs API to add a translation to an existing Dubbing Project using a CSV file containing the translated text to be used.\\par\r\n}\r\n"
+        accelerator_key : 65535
+        tab_order : 2
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            ChangeFenêtreSource(MaFenêtreInterne,FI_ElevenLabsAddTranslationToDubbing)
+           type : 18
+         -
+           type : 161
+           enabled : false
+    type : 32
+    code_elements :
+     type_code : 70
+     p_codes :
+      -
+        code : |1+
+         /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+         
+         PROCEDURE MaFenêtre()
+      -
+        code : |1+
+         
+         // Define the pane title
+         cPane est un Champ
+         cPane <- VoletDuChamp(MoiMême)
+         SI cPane <> Null ALORS cPane..Libellé = BuildPanelTitle("New project")
+        type : 14
+      -
+        code : |1+
+         
+         
+        type : 234
+      -
+        code : |1+
+         
+         
+        type : 43
+      -
+        code : |1+
+         
+         
+        type : 42
+      -
+        code : |1+
+         
+         
+        type : 2
+      -
+        code : |1+
+         
+         
+        type : 17
+ menu :
+  name : _Menu
+  identifier : 0x280121848d73e70c
+  internal_properties : HwAAAB4AAACtcPsJy2RVJ4bBHwRSjs1nJOrDLarDGsUU+7Q19aeu2bTT8KkZLe+Jy337vheWuNOBzHrslcTV8GVGQnnKH4KqUi8h8pOsbo6e3w8u9BoJ9QGgmPIVrsg7+vfhfRRmW79vMyFSlYTnMPSVYoylMI+MkK1MlXwldIvhAUMUf0nS+ypJ/l+AjQqTiG1BHMfQz/kiv5Xv3pAGmXsVFFeJm5R7MdOXa6UBpDCjXgE0x+pN+lWXzvpEOB4Ak0Ypb534Q+WUlogzl0XaPG7rixp91FahlMuh5X4jAxSHIqKR6pjS
+  properties : {}
+  style : {}
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar : {}
+ actionbar : {}
+ code_elements :
+  type_code : 71
+  p_codes : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : FI_SansNom1
+resources :
+ string_res :
+  identifier : 0x180121841ebfe70c
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAAAw1yJwJOWnBFt8iy6Ww8JWR1G08XnjNT9VuwnlXBOxjoNDueSgBJd4Fg==

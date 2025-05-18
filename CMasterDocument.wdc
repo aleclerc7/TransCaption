@@ -1,0 +1,223 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CMasterDocument
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+ options : 256
+class :
+ identifier : 0x181e75ae0232e2b5
+ internal_properties : HwAAAB4AAAD+1kTo6KJy2WQU0Y4fbFD6aQ7NWfD4KKkN7Ml67nIqLXIRxJ1vjfJ1
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+      
+      // Handling Master Document for working with subtitles.
+      
+      CMasterDocument est une Classe
+      	m_sFilename	est une chaîne					// Filename of the Master Document
+      	m_sContent	est une chaine					// Content of the master document (RAW)
+      	//
+      	m_cSubtitles est un CSubtitle dynamique		// Subtitle (and timecode) management linked to the Master Document
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1737955896433304245
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+      m_cSubtitles = allouer un CSubtitle
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1737955896433369781
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : LoadFromFile
+     procedure_id : 1737990320672223412
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : <indiquez ici le rôle de sFilename>
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure LoadFromFile(sFilename est une chaine) : booléen
+      
+      LF est une chaine = Caract(10)
+      
+      SI PAS fFichierExiste(sFilename) ALORS
+      	ErreurDéclenche(101,"File does not exist.")
+      	RENVOYER Faux
+      FIN
+      
+      // Validate file format
+      SI PAS sFilename ~] ".tcmd" ALORS
+      	ErreurDéclenche(102,"This is not an supported format (.tcmd).")
+      	RENVOYER Faux
+      FIN
+      
+      // Open file content
+      m_sContent = UTF8VersChaîne(fChargeTexte(sFilename))
+      SI m_sContent = "" _ET_ ErreurDétectée ALORS
+      	Erreur(ErreurInfo(errComplet))
+      	RENVOYER Faux
+      FIN
+      
+      m_sFilename		= sFilename
+      m_cSubtitles	= allouer un CSubtitle
+      
+      // Load the header as JSON. The very first line of the document is the JSON document that contains all the Master Document data.
+      si m_sContent[[1 a 6]] = "JSON: " alors
+      	j	est un Buffer
+      	n	est un entier	= Position(m_sContent,crlf)
+      	si n > 0 alors
+      		j						= m_sContent[[7 a n-1]]
+      		m_sContent[[1 à n+1]]	= ""
+      		Désérialise(m_cSubtitles.m_tabContent,j,psdJSON)
+      		SI ErreurDétectée ALORS
+      			ErreurPropage("Unable to retrieve Master Document header information.")
+      			RENVOYER Faux
+      		FIN
+      	sinon
+      		ErreurDéclenche(110,"Unable to retrieve Master Document header information.")
+      		renvoyer faux
+      	fin
+      
+      	// Rebuild the subtitles from the header information
+      	m_cSubtitles.ContentFromNumberedText(m_sContent)
+      	renvoyer vrai
+      FIN
+      
+      // Load the header as YAML (more advanced format)
+      si m_sContent[[1 à 4]] = "---" + LF ALORS
+      	y	est un YAML
+      	n	est un entier	= Position(m_sContent, LF + "---" + LF)
+      	SI n > 0 ALORS
+      		y						= m_sContent[[5 À n-1]]
+      		SI y.type ~= "tcmd" ALORS
+      			SI y.version = 1 ALORS
+      				m_sContent[[1 À n+4]]	= ""
+      				m_cSubtitles.TimecodesFromYAML(y.timecodes)
+      				SI ErreurDétectée ALORS
+      					ErreurPropage("Unable to retrieve Master Document header information.")
+      					RENVOYER Faux
+      				FIN
+      
+      				// Rebuild the subtitles from the header information
+      				m_cSubtitles.ContentFromNumberedText(m_sContent,Faux,Vrai)
+      				renvoyer vrai
+      			FIN
+      		FIN
+      	fin
+      FIN
+      
+      ErreurDéclenche(103,"Master Document version is not supported.")
+      RENVOYER Faux
+     type : 458752
+   -
+     name : SaveToFile
+     procedure_id : 1737990342147130569
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : <indiquez ici le rôle de sFilename>
+      //	sTCMDVersion (chaîne ANSI - valeur par défaut="1.0") : File version (proto, format) to use to save the document.
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      // 	_sFilename : <indiquez ici le rôle de _sFilename>
+      procédure SaveToFile(sFilename est une chaine = m_sFilename, sTCMDVersion est une chaine = "1.0")
+      
+      LF est une chaine = caract(10)
+      
+      // Build content to save
+      b est un buffer
+      serialise(m_cSubtitles.m_tabContent,b,psdJSON)
+      si ErreurDétectée ALORS
+      	ErreurPropage("Unable to save timecodes")
+      	RENVOYER Faux
+      FIN
+      
+      si m_sContent = "" alors
+      	m_sContent = m_cSubtitles.ContentToNumberedText(CSubtitle.tfParagraphOnTimestampBreak)
+      FIN
+      
+      sContent est une chaîne
+      
+      si sTCMDVersion = "0.1" alors
+      	sContent = "JSON: " + b + LF + m_sContent
+      sinon si sTCMDVersion = "1.0" alors
+      	y est un yaml
+      	y.type = "tcmd"
+      	y.version..Valeur = sTCMDVersion
+      	sContent = "---"
+      	sContent += [LF] + y..FormatYAML
+      
+      	// The way WinDev encodes YAML arrays and sequences is too lengthy (one line per item). There is actually no option to
+      	// ask for a mode "compact" mode on these types. So we will create our YAML output to save space for the timecode.
+      	// (Something like y.timecodes[1]..Compact = True would have been nice. Anything under "Compact" whould be so. y.timecodes..Compact = True, etc.)
+      	sContent += [LF] + "timecodes: " + LF + m_cSubtitles.TimecodesToYAMLSequenceOfCompactMappings()
+      
+      	// End of header part, and content
+      	sContent += [LF] + "---"
+      	sContent += [LF] + m_sContent
+      FIN
+      
+      retour = fSauveTexte(sFilename,ChaîneVersUTF8(sContent))
+      si retour alors
+      	m_sFilename = sFilename
+      FIN
+     type : 458752
+   -
+     name : Export
+     procedure_id : 1738247984690075702
+     type_code : 12
+     code : |1+
+      // Résumé : Export the master document to the desired format.
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : Filename to export to. Extension of the file will determine the format used.
+      // Valeur de retour :
+      // 	booléen : True if succesful, otherwise false with error.
+      //
+      procédure Export(sFilename est une chaine) : booléen
+      
+      // If in MasterDocument mode, make sure the latest data is in the subtitle class
+      si m_sFilename <> "" alors
+      	m_cSubtitles.ContentFromNumberedText(m_sContent)
+      FIN
+      
+      selon fExtraitChemin(sFilename,fExtension)
+      	CAS ".srt":	RENVOYER m_cSubtitles.ExportToSRT(sFilename)
+      	cas ".sbv":	renvoyer m_cSubtitles.ExportToSBV(sFilename)
+      	AUTRE CAS:	ErreurDéclenche(101,chaineconstruit("File extension not supported (%1).",fextraitchemin(sFilename,fExtension)))
+      FIN
+      
+      renvoyer faux
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x181e758f022f67f7
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAADnl3uxgA6ylw4vtqUKEOJQD3VAAOKeNUmhPNojcRFoDpHEcUyYAw==

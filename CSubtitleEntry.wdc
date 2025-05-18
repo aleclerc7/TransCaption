@@ -1,0 +1,310 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CSubtitleEntry
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+ options : 256
+class :
+ identifier : 0x181e7a40056cbb40
+ internal_properties : HwAAAB4AAAD+1kTo6KJy2WQU0Y4fbFD6aQ7NWfD4KKkN7Ml67nIqLXIRxJ1vjfJ1
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+      
+      // Contains an SRT entry
+      
+      CSubtitleEntry est une Classe
+      	m_nID						est un entier	<sérialise="id">		// ID of this subtitle entry (if not SRT format, a unique ID must be generated)
+      	m_duTimecodeStart			est une durée	<sérialise="i">			// Timecode start point for this entry
+      	m_duTimecodeEnd				est une durée	<sérialise="o">			// Timecode end point for this entry
+      	m_sText						est une chaine	<sérialise=faux>		// Text of the subtitle
+      	//
+      	m__bTimecodeNotContinuous	est un booléen	<sérialise=faux>		// If this timecode relative to it's predecessor is not continuous
+      	m__sSpeaker					est une chaine	<sérialise=faux>		// Give the opportunity to identify a speaker for this timecode
+      fin
+      
+      ETimecodeFormat est une énumération
+      	tfSRT
+      	tfSVB
+      fin
+      
+      ETimecodePart est une combinaison
+      	tpStart
+      	tpEnd
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1737960921599228736
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1737960921599294272
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : TextAsSingleLine
+     procedure_id : 1737960921599359808
+     type_code : 12
+     code : |1+
+      // Résumé : Will return the m_sText value as a single line. If there are CRLF, they will be replaced by a space, and make sure there are no double spaces while doing so.
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	chaîne ANSI : m_sText value as a single line.
+      //
+      procédure TextAsSingleLine() : chaine
+      
+      sContent est une chaîne
+      
+      POUR TOUTE CHAÎNE s DE m_sText SÉPARÉE PAR RC
+      	sContent += [" "] + s
+      FIN
+      
+      renvoyer sContent
+     type : 458752
+   -
+     name : TimecodeDuration
+     procedure_id : 1737960921599425344
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	durée : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure TimecodeDuration() : durée
+      
+      renvoyer m_duTimecodeEnd - m_duTimecodeStart
+     type : 458752
+   -
+     name : MergeWith
+     procedure_id : 1737960921599490880
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	e (CSRTEntry dynamique) : <indiquez ici le rôle de e>
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure MergeWith(e est un CSubtitleEntry dynamique)
+      
+      si m_duTimecodeStart < e.m_duTimecodeStart ALORS
+      	// This entry comes first
+      	m_sText += [rc] + e.m_sText
+      	m_dutimecodeend = e.m_duTimecodeEnd
+      SINON
+      	// The provided entry comes first
+      	m_sText = e.m_sText + [rc] + m_sText
+      	m_duTimecodeStart = e.m_duTimecodeStart
+      FIN
+     type : 458752
+   -
+     name : SplitTextInLines
+     procedure_id : 1737960921599556416
+     type_code : 12
+     code : |1+
+      // Résumé : Will split the text on multiple lines so that the maximum number of characters is not exceeded (as best as possible).
+      // Paramètres :
+      //	nMaxCharPerLine (entier - valeur par défaut=60) : Maximum number of characters there should be on a line.
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure SplitTextInLines(nMaxCharPerLine est un entier = 60)
+      
+      nSize est un entier = Taille(m_sText)
+      // Try to split the sentence as much as possible in the center, if necessary
+      SI nSize > nMaxCharPerLine ALORS
+      	// We split in equal parts, respecting the maximum number of characters per line:
+      	nParts			est un entier	= ArrondiSupérieur(nSize / nMaxCharPerLine)
+      	nSection		est un entier	= nSize / nParts
+      
+      	sTextToSplit	est une chaîne	= sansespace( Remplace(m_sText, RC, " ") )
+      	m_sText = ""
+      
+      	i est un entier
+      	TANTQUE sTextToSplit <> ""
+      		// Find a nice spot to cut roughly at the n point
+      		SI nParts > 1 ALORS
+      			i = Position(sTextToSplit," ", nSection)
+      		SINON
+      			i = 0
+      		FIN
+      
+      		// Make the cut on the point found
+      		SI i = 0 ALORS
+      			m_sText += [RC] + SansEspace(sTextToSplit)
+      			sTextToSplit = ""
+      		SINON
+      			m_sText += [RC] + SansEspace(sTextToSplit[[ À i]])
+      			sTextToSplit[[ À i]] = ""
+      		FIN
+      		nParts--
+      	FIN
+      FIN
+     type : 458752
+   -
+     name : TimecodeToString
+     procedure_id : 1737960921599621952
+     type_code : 12
+     code : |1+
+      // Résumé : Returns timecode as a string in the desired format
+      // Paramètres :
+      //	eFormat (CSRTEntry.ETimecodeFormat) : Format to use
+      //	ePart (CSRTEntry.ETimeCodePart) : Parts of the timecode to return. If both parts are returned (default), the proper separator will be added.
+      // Valeur de retour :
+      // 	chaîne ANSI : String representing the timecode
+      //
+      procédure TimecodeToString(eFormat est un ETimecodeFormat, ePart est une ETimecodePart = tpStart+tpEnd) : chaine
+      
+      sFormat	est une chaîne
+      sSep	est une chaîne
+      
+      selon eFormat
+      	CAS tfSRT
+      		sFormat	= "HH:MM:SS,CCC"
+      		sSep	= " --> "
+      
+      	CAS tfSVB
+      		sFormat	= "HH:MM:SS.CCC"
+      		sSep	= ","
+      
+      FIN
+      
+      si ePart = tpStart+tpEnd alors
+      	RENVOYER DuréeVersChaîne(m_duTimecodeStart,sFormat) + sSep + DuréeVersChaîne(m_duTimecodeEnd,sFormat)
+      SINON si ePart = tpStart
+      	RENVOYER DuréeVersChaîne(m_duTimecodeStart,sFormat)
+      SINON si ePart = tpEnd
+      	RENVOYER DuréeVersChaîne(m_duTimecodeEnd,sFormat)
+      sinon
+      	renvoyer ""
+      FIN
+     type : 458752
+   -
+     name : TimecodeFromString
+     procedure_id : 1737960921599687488
+     type_code : 12
+     code : |1+
+      // Résumé : Load timecode values from a string.
+      // Paramètres :
+      //	eFormat (CSRTEntry.ETimecodeFormat) : Format of the string
+      //	sTimecode (chaîne ANSI) : Timecode value as string in the specified format
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure TimecodeFromString(eFormat est un ETimecodeFormat, sTimecode est une chaine)
+      
+      sFormat	est une chaine
+      sSep	est une chaîne
+      
+      SELON eFormat
+      	CAS tfSRT
+      		sFormat	= "HH:MM:SS,LLL"
+      		sSep	= " --> "
+      
+      	CAS tfSVB
+      		sFormat	= "HH:MM:SS.LLL"
+      		sSep	= ","
+      
+      		// Some timecode entries are not properly formated (like the ones from YouTube miss a leading digit "0:00:00.000" instead of "00:00:00.000")
+      		// If this is the case, we must add the missing leading "0"
+      		SI sTimecode[[2]] = ":" ALORS
+      			sTimecode[[1]] = "0" + sTimecode[[1]]
+      		FIN
+      		n est un entier = position(sTimecode,",")
+      		SI sTimecode[[n+2]] = ":" ALORS
+      			sTimecode[[n+1]] = "0" + sTimecode[[n+1]]
+      		FIN
+      
+      FIN
+      
+      m_duTimecodeStart	= chaineversdurée( ExtraitChaîne(sTimecode,1,sSep), sFormat )
+      m_duTimecodeEnd		= chaineversdurée( ExtraitChaîne(sTimecode,2,sSep), sFormat )
+     type : 458752
+  properties :
+   -
+     name : p_sText
+     identifier : 0x181e7a40056dbb40
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         procédure publique p_sText() : chaîne ANSI
+         
+         renvoyer m_sText
+        type : 1966080
+      -
+        code : |1+
+         procédure publique p_sText(Valeur est chaîne ANSI)
+         
+         m_sText = Valeur
+         SplitTextInLines()
+        type : 2031616
+     template_refs : []
+   -
+     name : p_hTimecodeStart
+     identifier : 0x1821482d0218227f
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         procédure publique p_hTimecodeStart() : Heure
+         
+         renvoyer DuréeVersChaîne(m_duTimecodeStart,"HHMMSSCCC")
+        type : 1966080
+      -
+        code : |1-
+         procédure publique p_hTimecodeStart(Valeur est Heure)
+         
+         m_duTimecodeStart=ChaîneVersDurée(Valeur,"HHMMSSLLL")
+        type : 2031616
+     template_refs : []
+   -
+     name : p_hTimecodeEnd
+     identifier : 0x18214839022b5130
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         procédure publique p_hTimecodeEnd() : Heure
+         
+         renvoyer DuréeVersChaîne(m_duTimecodeEnd,"HHMMSSCCC")
+        type : 1966080
+      -
+        code : |1-
+         procédure publique p_hTimecodeEnd(Valeur est Heure)
+         
+         m_duTimecodeEnd=ChaîneVersDurée(Valeur,"HHMMSSLLL")
+        type : 2031616
+     template_refs : []
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x17e5b2180962b198
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAADnl3uxgA6ylw4vtqUKEOJQD3VAAOKeNUmhPNojcRFoDpHEcUyYAw==
+associated_test :
+ name : TEST_CSubtitleEntry.wxt

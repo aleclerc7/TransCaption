@@ -1,0 +1,254 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_UI
+ major_version : 30
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+ options : 256
+procedure_set :
+ identifier : 0x18010b1604cf48c0
+ internal_properties : HwAAAB4AAADjksEavC8JwuEiHc63C+ul0ggS/BOiC8PJfOp/6aEkSKX4qEWcBw==
+ code_elements :
+  type_code : 31
+  p_codes :
+   -
+     code : |1+
+      /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+      
+      gsAppParam est une chaîne	// Application persistant values
+      
+      EPath est une Enumération
+      	pathBin
+      	pathData
+      	pathUserSyncedData
+      	pathFFMPEG
+      FIN
+      
+      constante
+      	C_PATH_FFMPEG	=	"PATH.FFMPEG"
+      fin
+      
+     type : 720896
+  procedures :
+   -
+     name : SelectFilename
+     procedure_id : 1729675998394355487
+     type_code : 15
+     code : |1+
+      // Résumé : Ask the user to confirm the desired filename.
+      // Paramètres :
+      //	sFileOrPath (chaîne ANSI) : Default filename or path to use.
+      //	sFileExtList (chaîne ANSI - valeur par défaut="*.*") : List of file extentions to use as filter, separated by semicolons ("*.txt;srt;.edl"). All special codes available in ListFileExtensions() can be used.
+      //	sAddToFilename (chaîne ANSI - valeur par défaut="") : If the filename should be concatenated with an additionnal string. **Using this parameter will trigger the open dialog in write mode, instead of the default select mode.**
+      //	sNewExtension (chaîne ANSI - valeur par défaut="") : If the extension should be changed. Use "*" to keep the same extension, but trigger the write mode. **Using this parameter will trigger the open dialog in write mode, instead of the default select mode.**
+      //	sTitle (chaîne ANSI - valeur par défaut="") : Title to display in the file selector. An appropriate default title will be used if none specified.
+      // Valeur de retour :
+      // 	Type indéterminé : <indiquez ici le rôle de la valeur de retour>
+      //
+      //	bWriteMode (booléen - valeur par défaut=0) : If the file selector should be in "write" mode. By default it is in "open" mode.
+      procédure SelectFilename(local sFileOrPath est une chaîne, sFileExtList est une chaîne = "*.*", sAddToFilename est une chaine = "", sNewExtension est une chaine = "", sTitle est une chaine = "")
+      
+      bWriteMode est un booléen
+      
+      si sAddToFilename <> "" ALORS
+      	bWriteMode = Vrai
+      	sFileOrPath = fExtraitChemin(sFileOrPath, fDisque+fFichier+fRépertoire) + sAddToFilename + fExtraitChemin(sFileOrPath, fExtension)
+      FIN
+      
+      si sNewExtension = "*" alors
+      	bWriteMode = Vrai
+      sinon si sNewExtension <> "" alors
+      	bWriteMode	= Vrai
+      	sFileOrPath	= fExtraitChemin(sFileOrPath, fDisque+fFichier+fRépertoire) + ["."] + sNewExtension
+      FIN
+      
+      soit sPath = fExtraitChemin(sFileOrPath,fDisque+fRépertoire)
+      soit sFile = fExtraitChemin(sFileOrPath,fFichier+fExtension)
+      
+      si bWriteMode = faux ALORS
+      	sFileOrPath = fSélecteur(sPath, sFile, sTitle="" ? "Please select a file…" sinon sTitle, ListFileExtensions(sFileExtList), "", fSelOuvre + fSelExiste)
+      sinon
+      	sFileOrPath = fSélecteur(sPath, sFile, sTitle="" ? "Confirm file to write to…" sinon sTitle, ListFileExtensions(sFileExtList), "", fselCrée + fselExiste)
+      FIN
+      
+      renvoyer sFileOrPath
+      
+     type : 458752
+   -
+     name : LoadAppParam
+     procedure_id : 1729689755408756627
+     type_code : 15
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure LoadAppParam()
+      
+      sContent	est une chaîne	= fChargeBuffer(fRepExe() / (enmodetest() ? "TEST_TransCaption.yaml" sinon "TransCaption.yaml"))
+      
+      y est un YAML
+      y..FormatYAML	= sContent
+      
+      gsAppParam		= Décompresse(y.persistentUserData)
+      
+     type : 458752
+   -
+     name : SaveAppParam
+     procedure_id : 1729689785473599922
+     type_code : 15
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure SaveAppParam()
+      
+      y est un YAML
+      y.persistentUserData	= Compresse(gsAppParam,compresseGZIP)
+      sContent est une chaine	= y..FormatYAML
+      fSauveBuffer(frepexe()/(EnModeTest() ? "TEST_TransCaption.yaml" SINON "TransCaption.yaml"),sContent)
+     type : 458752
+   -
+     name : GetPath
+     procedure_id : 1734935526137683897
+     type_code : 15
+     code : |1+
+      // Résumé : Returns desired path.
+      // Paramètres :
+      //	ePathType (COL_UI.EPath) : Type of path desired.
+      // Valeur de retour :
+      // 	chaîne ANSI : Requested path, properly terminated.
+      //
+      procédure globale GetPath(ePathType est un epath = pathData) : chaine
+      
+      selon ePathType
+      	cas pathBin
+      		SI EnModeTest() ALORS // Could be also the USB (or compact) mode
+      			RENVOYER ComplèteRep(fRepExe())
+      		SINON
+      			RENVOYER ComplèteRep(fRepExe())	//ComplèteRep(fRepGlobalUtilisateur()) + "BibleIndex" + fSep
+      		FIN
+      
+      	CAS pathData
+      		SI EnModeTest() ALORS // Could be also the USB (or compact) mode
+      			RENVOYER ComplèteRep(fRepExe())
+      		SINON
+      			RENVOYER ComplèteRep(fRepExe())	//ComplèteRep(fRepGlobalUtilisateur()) + "BibleIndex" + fSep
+      		FIN
+      
+      	CAS pathUserSyncedData
+      		RENVOYER GetPath(pathData)	// Not implemented yet
+      
+      	cas pathFfmpeg
+      		RENVOYER ComplèteRep(GetParam(C_PATH_FFMPEG, GetPath(pathData)))
+      FIN
+      
+     type : 458752
+   -
+     name : BuildPanelTitle
+     procedure_id : 1735406225194983042
+     type_code : 15
+     code : |1+
+      // Résumé : Returns a title useful for panels
+      // Paramètres :
+      //	sTitle (chaîne ANSI) : <indiquez ici le rôle de sTitle>
+      //	sFilename (chaîne ANSI - valeur par défaut="") : <indiquez ici le rôle de sFilename>
+      // Valeur de retour :
+      // 	Type indéterminé : // 	Aucune
+      //
+      procédure BuildPanelTitle(sTitle est une chaîne, sFilename est une chaine = "")
+      
+      si sFilename <> "" ALORS
+      	RENVOYER " " + fExtraitChemin(sFilename, fFichier+fExtension) + " — " + sTitle
+      sinon
+      	renvoyer " " + sTitle
+      FIN
+     type : 458752
+   -
+     name : ListFileExtensions
+     procedure_id : 1738225736359054337
+     type_code : 15
+     code : |1+
+      // Résumé : Return a list of file extensions for the desired extensions. Useful for file dialogs.
+      // Paramètres :
+      //	sExtensions (chaîne ANSI) : List of desired extensions separated by semicolons ("srt;sbv"). Special codes: "*" for all files ("*.*"), "[subtitles]" for all supported subtitles files (open dialog).
+      // Valeur de retour :
+      // 	chaîne ANSI : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure ListFileExtensions(sExtensions est une chaine) : chaine
+      
+      sExt est une chaine
+      s est une chaine
+      pour TOUTE CHAÎNE s DE sExtensions SÉPARÉE PAR ";"
+      	s = sansespace(s)
+      	si s[[1 a 2]] = "*."		alors s[[1]] = ""
+      	si s[[1]] = "."				alors s[[1]] = ""
+      	selon s
+      		CAS "edl":				sExt += [rc] + "Edit Decision List (*.edl)" + TAB + "*.edl"
+      		CAS "sbv":				sExt += [rc] + "YouTube SubViewer (*.sbv)" + TAB + "*.sbv"
+      		CAS "srt":				sExt += [RC] + "SubRip (*.srt)" + TAB + "*.srt"
+      		CAS "tcmd":				sExt += [rc] + "TransCaption Master Document (*.tcmd)" + TAB + "*.tcmd"
+      		CAS "[audio]":			sExt += [RC] + "Audio files (*.mp3)" + TAB + "*.mp3"
+      		CAS "[subtitles]":		sExt += [rc] + "Subtitle files (*.srt; *.sbv; *.tcmd)" + TAB + "*.srt;*.sbv;*.tcmd"
+      		CAS "[subtitlesonly]":	sExt += [rc] + "Subtitle files (*.srt; *.sbv)" + TAB + "*.srt;*.sbv"
+      		CAS "[video]":			sExt += [rc] + "Video Files (*.mp4; *.mov; *.avi; *.mkv; *.flv; *.webm; *.mpeg)" + TAB + "*.mp4;*.mov;*.avi;*.mkv;*.flv;*.webm;*.mpeg"
+      		CAS "*":				sExt += [RC] + "All files (*.*)" + TAB + "*.*"
+      		autre cas:				sExt += [rc] + chaineconstruit("*.%1" + tab + "*.%1", s)
+      	FIN
+      FIN
+      
+      renvoyer sExt
+     type : 458752
+   -
+     name : GetParam
+     procedure_id : 1738324367993795517
+     type_code : 15
+     code : |1+
+      // Résumé : Get a parameter and make sure the default value is returned if an empty string is returned.
+      // Paramètres :
+      //	sParam (chaîne ANSI) : Param name.
+      //	sDefault : Default value.
+      // Valeur de retour :
+      // 	chaîne ANSI : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure GetParam(sParam est une chaine, sDefault) : chaine
+      
+      retour = ChargeParamètre(sParam, sDefault)
+      si retour = "" alors retour = sDefault
+     type : 458752
+   -
+     name : GetParamForSecureThread
+     procedure_id : 1738327928637855871
+     type_code : 15
+     code : |1+
+      // Résumé : Wrapper for GetParam from a secure thread.
+      // Paramètres :
+      //	sParam (chaîne ANSI) : <indiquez ici le rôle de Param1>
+      //	sDefault : <indiquez ici le rôle de sDefault>
+      //	sReturn : <indiquez ici le rôle de sReturn>
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure GetParamForSecureThread(sParam est une chaîne, sDefault, sReturn)
+      
+      sReturn = GetParam(sParam, sDefault)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x18010afb04cddfd4
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAADnl3uxgA6ylw4vtqUKEOJQD3VAAOKeNUmhPNojcRFoDpHEcUyYAw==

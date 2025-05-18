@@ -1,0 +1,214 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : FI_ElevenLabsAddTranslationToDubbing
+ major_version : 30
+ minor_version : 0
+ type : 8
+ description : ""
+ subtype : 0
+ options : 256
+window :
+ name : FI_ElevenLabsAddTranslationToDubbing
+ identifier : 0x281e09570618abef
+ internal_properties : HwAAAB4AAACHgKkgGzEA4hAnzjrMzVb9TRMd9qvENkXOdZ+pnjp6AN4HAGbaurMJ/sk4I/iQtJCpJ0bRY/ZglntegJmXZR9ZjVy1tPuq7Tz4AmpBZH44eIWRhJEJzV52Uf1+Ua/QATQeizHEnwu/PVxx2HJ2h0cP0iM2KHNjS9aeODol70bx3cjDzeiQ1nKlCyq1SmBgPFVULPaBZxU3ViV0v2CkhdmDxTbOjRc/9MdryWkCMNBo6UMqZXmlSYfhMumAUg7d6mGxHjjOSkausXUyJ/PCfeetCHAwpEoF9nFT/hUe0OD5T1UnLcvxjKVVyV/+mPMMNO8OwQM1ycddAMpy/TKo6EHstSk/6PX82RN4DLlKE1xGOSgiAQPq14JfVp00VqZj0N5vYTSA5ThJbWYR3cvdKG0lOD2pbMhTB4sIAefFpstfx7y4ZI8Jnth2LWSuEisHV/ncG3zYdjsSOniFEpadDNCLoMb8AOR3R+vDGeZWMTJAL/Q4608VuoMf7r+K4o8c3naNu50Soy8fcojt08BJ0SP0vXa0Spls4YxeXY0CrArxj0omrXPHfe8FNQBYuzBovFfh7e9XBC6X6H5bIoMR4oE+05FR3DVCqrDwv7Vnb7zGAhO4p+jkZz7X5tbDGaM8uwkcty/CtduDCcriFLLk8N5uRx68/lRF3MULwpEISB3TBFcEXZ2ZJKSgbqoRiCfGFf0RxpEwoA6/q10/B8ccQRhAcXaJrwVfWESZckM/Gp8JSW5eBsQ2Yp94AKnIqBJ6qDkzQVaOaEheUdiXw1MUsw==
+ properties :
+  width : 640
+  height : 480
+ style : {}
+ controls :
+  -
+    name : FI_ElevenLabsAddTranslationToDubbing
+    identifier : 0x281e09570619abef
+    internal_properties : HwAAAB4AAAB+nUnP81N3Xxu+V2u+maagqFHjBLt4B52h41KvRX2Q6BBcDPAvh/VNVOQCJ9QW79gGpQ61+EsBSWrZDJcZUff+ogpyEFv9LXou1Gtb2TGRN96BTjS2a8+D8IKzPZ8n0FZ1m8aHlHIJQUbZw2tggnnTvvTVU5+iD4bkZs2KF6Fb58PRgVZQEAnBjVboX8tkdPKt30eReeT5uf3Jawo3I+hJpqBqJPdH8D/JucysGT68Fp6N3SYHsw/dZ9qzE/6IWEw16OKcDOBUM/gsegNAgiUDaDI3ZItR7OR3TSU9sYzDLQ6GPKg93vt50SzQqgcMaXWyxhOu0EwOU6vKLB0Vzcte+xlPeHICumpTAyhIHtJl/sSsOckEMSn4FPv/edlkwjL5MaU1mSqmIs9FUjld/4eYrvaTEVB62tKmAcxnzrNCeml0w70RKfkzVyLOukh63l1dCPm0eehJIbnaQhk=
+    properties :
+     width : 640
+     height : 480
+     tab_order : 0
+    style : {}
+    controls :
+     -
+       name : BTN_Get_dubbing_project_info
+       identifier : 0x281e0989080571fe
+       internal_properties : HwAAAB4AAACorzW+XODvh1s4EhhnbvRLDw6+lA6yFvLHA/ug1551n0UrJzjyNmK7QLxZc13lvyAJA/kUZlyaw6aDcWfmxoeEE1vj7JT1BCun4UBJ7IK8EBDivqJooCJO/suFVsOdI+xVtYHGw359H5PjdqjNplsK6MzNktDS5lSW/6f7Ym1Phr6rzDnvvUNMw3DIcq/ej/DE4yI8jR+hKTgtUsQyxpC5YhXQjTyqqb6cYmbQm9IlyXZHS1u36oTQtFzVREPk7PxpTiKCvnlpKuf5fzf89j9YXgnYgvtWW9jrtl4Z2FVscXrqHDe+kzu7iiuQPFMVX0plzSYR2iXyYKcT9ogWmxMbpDD4iaQAhgcri0Z4YuA3RuLCXftspmbqnA0GEm+oTR7CSO9EJi3yP06XZ3X5mSN4Re19Oi4ZWN4U3aCAYJ769+aa0rP4Upz0jlibLbMWRBEGyh3MHbuvcaK1Q7LPMxcTomGSMvp7zln+yRnaLfxbLu5EWuH8KSnCSJv3IcsHqyFRpimGT1+pOH0AsYtCrPu9dkhIe8XNgh7zNTclpwjGLP4ouQM9hz/0HEIy07LL0ITtiB3ugCGv4oCR/3FZWrQvLWOxfBmB/OZtGyHf0uupBTok2LRfhIw5TBCwC5vvKkWkXFRwtenrKJS1xTLHNOKxsMi2UsESO0kegm0NFfw9+qJz3Wdl5iwkqA+hjKOKjnCkd791cLkLzp94tRl9Fn4ZY4DvGiHQsD6COOHgkWNTurmj9zGjHclPdJsOUX3hj6V1ljQrsk3e1k8MD5aS8aLwzMwyVLTLKIfUeU+2GE5mIMciWnDVnjBWvxQZ9LePIPnhOpDl793vxSKvyQzBPSdKtJ2/VBxJ/POIcKLwr7LJ+wqQVo30UBSTFr4qPOz+abr3koIZ0NjjUZA8RQuSyYLyTXYG4q42vTBqXPD9H8XmCpeps2ROlNWr+A8mbwW3Z+uz6km8JR9wh8ub/pnO/fZGcyIHPfMup+7Ihm5hYEI/zyq1WYNlz6MC5adrHlUemA3BwsA4FYjIlioCaBYqBWawzLPD3u+UjqTlOhXC6QZgnsUbe20Okacveob8sUX4tSLYsd2bb4D8CnV12WNdT+j+OEuLdrUkjweSi58YA2RycdPAfB49KXQCgA8hRtVb5qgzfh0vPZvp5bl0dRhRd2T/mUeL
+       properties :
+        x : 208
+        y : 53
+        width : 201
+        height : 31
+        accelerator_key : 65535
+        tab_order : 1
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            sKey est une chaine = ChargeParamètre(C_ElevenLabs_APIKey)
+            si sKey = "" ALORS
+            	ToastAffiche("Set API Key in settings.")
+            	retour
+            FIN
+            
+            si SAI_DubbingID = "" alors
+            	ToastAffiche("Provide Dubbing ID")
+            	retour
+            FIN
+            
+            // Build the HTTP request
+            c11Labs est un httpRequête
+            c11Labs.URL						= "https://api.elevenlabs.io/v1/dubbing/resource/" + SAI_DubbingID
+            c11Labs.Entête["xi-api-key"]		= sKey
+            
+            // Send the request
+            cRes est un httpRéponse = HTTPEnvoie(c11Labs)
+            SI ErreurDétectée ALORS
+            	si ErreurInfo(errCode) = 422 ALORS
+            		SAI_Texte1 = "Unable to process request. Check Dubbing ID" + rc+rc + ErreurInfo(errComplet)
+            	sinon
+            		SAI_Texte1 = ErreurInfo(errComplet)
+            	FIN
+            	RETOUR
+            FIN
+            
+            // Get results
+            SAI_Texte1 = cRes.Contenu
+            lang est un JSON
+            lang..FormatJSON = cRes.Contenu
+            
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : SAI_Texte1
+       identifier : 0x281e098e08268596
+       internal_properties : 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
+       properties :
+        x : 16
+        y : 92
+        width : 613
+        height : 377
+        anchor : 10
+        accelerator_key : 65535
+        tab_order : 2
+       style : {}
+       type : 2
+       code_elements :
+        type_code : 3
+        p_codes :
+         -
+           code : |1-
+            // Version 1
+            // Description 
+            // Champ de saisie pour un texte multiligne simple, sans mise en forme
+           type : 14
+         -
+           type : 276
+           enabled : false
+         -
+           type : 277
+           enabled : false
+         -
+           type : 278
+           enabled : false
+         -
+           type : 338
+           enabled : false
+         -
+           type : 339
+           enabled : false
+     -
+       name : SAI_DubbingID
+       identifier : 0x281e09a90832ec01
+       internal_properties : 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
+       properties :
+        x : 69
+        y : 7
+        width : 284
+        height : 31
+        accelerator_key : 65535
+        tab_order : 0
+       style : {}
+       type : 2
+       code_elements :
+        type_code : 3
+        p_codes :
+         -
+           type : 276
+           enabled : false
+         -
+           type : 277
+           enabled : false
+         -
+           type : 278
+           enabled : false
+         -
+           type : 338
+           enabled : false
+         -
+           type : 339
+           enabled : false
+    type : 32
+    code_elements :
+     type_code : 70
+     p_codes :
+      -
+        code : |1+
+         PROCEDURE MaFenêtre()
+      -
+        code : |1+
+         
+         
+        type : 14
+      -
+        code : |1+
+         
+         
+        type : 234
+      -
+        code : |1+
+         
+         
+        type : 43
+      -
+        code : |1+
+         
+         
+        type : 42
+      -
+        code : |1+
+         
+         
+        type : 2
+      -
+        code : |1+
+         
+         
+        type : 17
+ menu :
+  name : _Menu
+  identifier : 0x281e0943060d5d91
+  internal_properties : HwAAAB4AAACtcPsJy2RVJ4bBHwRSjs1nJOrDLarDGsUU+7Q19aeu2bTT8KkZLe+Jy337vheWuNOBzHrslcTV8GVGQnnKH4KqUi8h8pOsbo6e3w8u9BoJ9QGgmPIVrsg7+vfhfRRmW79vMyFSlYTnMPSVYoylMI+MkK1MlXwldIvhAUMUf0nS+ypJ/l+AjQqTiG1BHMfQz/kiv5Xv3pAGmXsVFFeJm5R7MdOXa6UBpDCjXgE0x+pN+lWXzvpEOB4Ak0Ypb534Q+WUlogzl0XaPG7rixp91FahlMuh5X4jAxSHIqKR6pjS
+  properties : {}
+  style : {}
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar : {}
+ actionbar : {}
+ code_elements :
+  type_code : 71
+  p_codes : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : FI_SansNom1
+resources :
+ string_res :
+  identifier : 0x181e094301a75d91
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAAAw1yJwJOWnBFt8iy6Ww8JWR1G08XnjNT9VuwnlXBOxjoNDueSgBJd4Fg==

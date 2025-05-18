@@ -1,0 +1,763 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CSubtitle
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+ options : 256
+class :
+ identifier : 0x181e7a1f02f43ce8
+ internal_properties : HwAAAB4AAAD+1kTo6KJy2WQU0Y4fbFD6aQ7NWfD4KKkN7Ml67nIqLXIRxJ1vjfJ1
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+      
+      // Allow to read and write SRT files...
+      
+      CSubtitle est une Classe
+      public
+      	m_sFilename			est une chaine
+      	m_tabContent		est un tableau local de CSubtitleEntry	// CAUTION: "local" and not "dynamic": When the class is copied, each record must be copied and unique (due to some destructive processes).
+      	m_nMaxCharPerLine	est un entier	= 60					// When splitting sentences, use this a max number of characters there should be per line
+      fin
+      
+      TextFormat est une énumération
+      	tfContinuousText			= 1
+      	tfParagraphOnTimestampBreak	= 2
+      	tfParagraphOnSentence		= 3
+      fin
+      
+      ETimecodeRangeAction est une énumération
+      	traKeepEntry	// Will keep the whole entry
+      	traRemoveEntry	// Will remove the whole entry
+      	traTrimEntry	// Will trim the entry, if it is at least 1000ms long in duration
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1737960779823791336
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1737960779823856872
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : LoadFromFile
+     procedure_id : 1737960779823922408
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : <indiquez ici le rôle de sFilename>
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure LoadFromFile(sFilename est chaine)
+      
+      si pas fFichierExiste(sFilename) ALORS
+      	ErreurDéclenche(101,"File does not exist.")
+      	renvoyer faux
+      FIN
+      
+      // Validate file format
+      sFormat est une chaine = minuscule(fExtraitChemin(sFilename,fExtension))
+      si pas sFormat dans (".srt", ".sbv") alors
+      	ErreurDéclenche(102,"This is not an supported format (.SRT or .SBV files).")
+      	RENVOYER Faux
+      FIN
+      
+      // Open file content
+      sContent est une chaine = UTF8VersChaîne(fChargeTexte(sFilename))
+      si sContent = "" _ET_ ErreurDétectée ALORS
+      	erreur(erreurinfo(errComplet))
+      	renvoyer faux
+      FIN
+      
+      m_sFilename = sFilename
+      tableausupprimetout(m_tabContent)
+      
+      // Create entries
+      selon sFormat
+      	CAS ".srt" : _LoadDecodeSRT(sContent)
+      	cas ".sbv" : _LoadDecodeSBV(sContent)
+      FIN
+      
+      renvoyer Vrai
+     type : 458752
+   -
+     name : ExportToSRT
+     procedure_id : 1737960779823987944
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : <indiquez ici le rôle de sFilename>
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure ExportToSRT(sFilename est chaîne)
+      
+      si m_tabContent..Occurrence = 0 alors
+      	ErreurDéclenche(103,"There is no content to save.")
+      	renvoyer faux
+      FIN
+      
+      // Build content to save
+      sContent est une chaine
+      pour tout e de m_tabContent
+      	sContent += [rc+rc] + e.m_nID + rc + e.TimecodeToString(CSubtitleEntry.tfSRT) + rc + e.m_sText
+      FIN
+      
+      renvoyer fSauveTexte(sFilename,ChaîneVersUTF8(sContent))
+     type : 458752
+   -
+     name : ContentToNumberedText
+     procedure_id : 1737960779824053480
+     type_code : 12
+     code : |1+
+      // Résumé : Will return all the content in the form of a text with numbers matching the IDs of the timestamps.
+      // Paramètres :
+      //	eParagraphFormat (CSRTFile.TextFormat) : Optional paragraph formatting.
+      // Valeur de retour :
+      // 	chaîne ANSI : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure ContentToNumberedText(eParagraphFormat est un TextFormat = tfContinuousText) : chaine
+      
+      sContent est une chaîne
+      
+      SI eParagraphFormat = tfParagraphOnTimestampBreak ALORS
+      	POUR TOUT e,i DE m_tabContent
+      		// Is this clip consecutive with the next one? If no, we insert a paragraph break
+      		sContent += [" "] + "{" + e.m_nID + "}" + [" "] + e.TextAsSingleLine()
+      		SI i+1 <= m_tabContent..Occurrence ALORS
+      			SI PAS m_tabContent[i].m_duTimecodeEnd = m_tabContent[i+1].m_duTimecodeStart ALORS
+      				sContent += RC
+      			FIN
+      		FIN
+      	FIN
+      
+      	sContent = remplace(sContent,rc+" ",rc)
+      SINON
+      	POUR TOUT e DE m_tabContent
+      		sContent += [" "] + "{" + e.m_nID + "}" + [" "] + e.TextAsSingleLine()
+      	FIN
+      
+      	SI eParagraphFormat = tfParagraphOnSentence ALORS
+      		sContent	= Remplace(sContent, ". ", "."+CRLF)
+      		sContent	= Remplace(sContent, "! ", "!"+CRLF)
+      		sContent	= Remplace(sContent, "? ", "?"+CRLF)
+      	FIN
+      FIN
+      
+      // Delete all unbreakable spaces that might be in the file. This messes things up for nothing
+      // We also cleanup all double spaces
+      sContent	= Remplace(sContent," "," ")	// Delete unbreakable spaces
+      sContent	= Remplace(sContent,"  "," ")	// Delete all double spaces
+      sContent	= Remplace(sContent,RC+" ",RC)	// Delete all cases where a new line starts with a space
+      
+      renvoyer sContent
+     type : 458752
+   -
+     name : ContentFromNumberedText
+     procedure_id : 1737960779824119016
+     type_code : 12
+     code : |1+
+      // Résumé : Will take a numbered text with nested IDs and put back the text as the next SRT content.
+      // Paramètres :
+      //	sTextBlock (chaîne ANSI) : Text block to use
+      //	bDeleteEntriesNotFound (booléen - valeur par défaut=0) : If an entry is not found in the text block, it will be deleted from the SRT file. Otherwise it will stay there.
+      //	bRemoveCommentsAndCRLF (booléen - valeur par défaut=1) : Considers a ligne begining with a "#" as a comment. Removes all CRLF in the text to have it as a valid TextBlock. This feature is useful if the textblock has been reviewed and formated during revision.
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure ContentFromNumberedText(local sTextBlock est une chaine, bDeleteEntriesNotFound est un booléen = Faux, bRemoveCommentsAndCRLF est un booléen = Vrai)
+      
+      si bRemoveCommentsAndCRLF ALORS
+      	sNewText est une chaine
+      	s est une chaine
+      
+      	// All # are considered as comment, even if they are MD titles. (This is on purpose).
+      	// An easy way to go around this is to simply add one space before #, and it will be treated as text part of the subtitles.
+      	POUR TOUTE CHAÎNE s DE sTextBlock SÉPARÉE PAR rc
+      		si s [= "#" alors
+      			continue
+      		FIN
+      		sNewText += s + rc
+      	FIN
+      
+      	// Remove all markdown from the text
+      	sNewText = MarkdownVersTexte(sNewText)
+      
+      	// We could also remove all HTML code from the text... but have to test that later.
+      	sNewText = HTMLVersTexte(sNewText)
+      
+      	// Remove double spaces that might have been created...
+      	sNewText = Remplace(sNewText, "  ", " ")
+      
+      	// We are done with removing special formating
+      	sTextBlock = sNewText
+      FIN
+      
+      // Find each entry in the text block to get it's updated value
+      pour tout e de m_tabContent
+      	sID est une chaine = "{"+e.m_nID+"}"
+      
+      	// Find the entry point
+      	i est un entier = position(sTextBlock, sID)
+      	si i = 0 ALORS
+      		si bDeleteEntriesNotFound ALORS
+      			TableauSupprime(m_tabContent, ElémentCourant)
+      		FIN
+      		continue
+      	FIN
+      
+      	// Find the end of the entry point
+      	o est un entier = position(sTextBlock, "{", i+1)
+      	si o = 0 alors
+      		o = taille(sTextBlock)+1
+      	FIN
+      
+      	sSubtitle est une chaine = sansespace(sTextBlock[[i+Taille(sID) À o-1]])
+      
+      	// Update the content
+      	e.p_sText = sSubtitle
+      FIN
+     type : 458752
+   -
+     name : ClipMergeOptimization
+     procedure_id : 1737960779824250088
+     type_code : 12
+     code : |1+
+      // Résumé : Will try to merge clips in an optimized way, respecting a maximum length duration.
+      // Paramètres :
+      //	nMaxClipDuration (entier) : Maximum clip duration (in sec) that cannot be exceded.
+      //	TranslationSRT (CSRTFile dynamique - valeur par défaut=0) : <indiquez ici le rôle de TranslationSRT>
+      // 	bIgnoreSentenceOptimization (booléen - valeur par défaut=0) : <indiquez ici le rôle de bIgnoreSentenceOptimization>
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure ClipMergeOptimization(nMaxClipDuration est une entier, TranslationSRT est un CSubtitle dynamique = Null, bIgnoreSentenceOptimization est un booléen = Faux)
+      
+      // - We can try to optimize clip length for Dubbing in ElevenLabs. This will merge clips together to have a better length and a better rendering.
+      // - Logic we will try to accomplish:
+      //   - Make a clip "stop" if there is a "end" punctuation to the clip (.!?) [option to disable if desired?].
+      //   - Make a clip stop before the maximum clip duration is reached (important).
+      //   - Do not merge clips that are not immediately consecutive.
+      
+      // This is not our responsability to check if both SRT files are compatible, but we want to avoid a crash with different index count.
+      si TranslationSRT <> Null _ET_ TranslationSRT.m_tabContent..Occurrence <> m_tabContent..Occurrence ALORS
+      	retour
+      FIN
+      
+      e		est un CSubtitleEntry dynamique
+      bMerged	est un booléen
+      
+      BOUCLE
+      	SI m_tabContent..Occurrence <= 1 ALORS
+      		SORTIR
+      	FIN
+      	i		est un entier	= 1
+      	bMerged	= Faux
+      
+      	BOUCLE
+      		// Have we reached the end?
+      		si i+1 > m_tabContent..Occurrence ALORS
+      			sortir
+      		FIN
+      
+      		// Is this clip consecutive with the next one? If no, we cannot merge.
+      		si pas m_tabContent[i].m_duTimecodeEnd = m_tabContent[i+1].m_duTimecodeStart alors
+      			i++
+      			continuer
+      		fin
+      
+      		// Can both clip be merge length-wise? If it is too long, we cannot merge.
+      		d est une durée = m_tabContent[i].TimecodeDuration() + m_tabContent[i+1].TimecodeDuration()
+      		si d..EnSecondes > nMaxClipDuration alors
+      			i++
+      			CONTINUER
+      		FIN
+      
+      		// Avoid a merge? — Is clip punctuation too good for a merge? (Check the next one if it is also good.)
+      		si bIgnoreSentenceOptimization = Faux alors
+      			// Optimize strings for verification. We eliminate quotations are they are considered “transparent” punctuation. (And non-breaking, narrow non-breaking and thin space.)
+      			s1 est une chaine = sansespace( remplace(m_tabContent[i].m_sText,	["""", "«", "»", "“", "”", CaractUnicode(0x00A0), CaractUnicode(0x202F), CaractUnicode(0x2009)],"") )
+      			s2 est une chaîne = SansEspace( Remplace(m_tabContent[i+1].m_sText,	["""", "«", "»", "“", "”", CaractUnicode(0x00A0), CaractUnicode(0x202F), CaractUnicode(0x2009)],"") )
+      			si droite(s1,1) dans (".","!","?") ALORS
+      				// Unless the other sentence ends very well, we do not merge.
+      				SI pas droite(s2,1) DANS (".","!","?") ALORS
+      					i++
+      					CONTINUER
+      				FIN
+      			sinon
+      				// If this is nevertheless a not too bad spot to end, and there is nothing better after, we stop here too
+      				SI droite(s1,1) DANS (";",",",":","—","–") ALORS
+      					// So if we have a punctuation here, but nothing in the next one, we do not merge. We keep this ending
+      					SI PAS droite(s2,1) DANS (".","!","?",";",",",":","—","–") ALORS
+      						i++
+      						CONTINUER
+      					FIN
+      				FIN
+      			FIN
+      		FIN
+      
+      		// Merge
+      		// At this point me made all the tests we desired and we are good to merge
+      		m_tabContent[i].MergeWith(m_tabContent[i+1])
+      		tableausupprime(m_tabContent,i+1)
+      
+      		// If we have a translation SRT, we have to sync all the merges there too. We hope it works for it too.
+      		si TranslationSRT <> Null alors
+      			TranslationSRT.m_tabContent[i].MergeWith(TranslationSRT.m_tabContent[i+1])
+      			TableauSupprime(TranslationSRT.m_tabContent,i+1)
+      		FIN
+      
+      		// We do not go to the next element as this element is still active for another potential merge
+      		bMerged = Vrai
+      
+      	FIN
+      
+      À FAIRE TANTQUE bMerged
+      
+      // We change the numbering of the IDs for the SRT file (in case the user wants to save this as an SRT file)
+      
+      pour tout e,i de m_tabContent
+      	e.m_nID = i
+      FIN
+     type : 458752
+   -
+     name : ExportToSBV
+     procedure_id : 1737960779824315624
+     type_code : 12
+     code : |1+
+      // Résumé : Export to SubViewer format
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : <indiquez ici le rôle de sFilename>
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure ExportToSBV(sFilename est chaîne)
+      
+      SI m_tabContent..Occurrence = 0 ALORS
+      	ErreurDéclenche(103,"There is no content to save.")
+      	RENVOYER Faux
+      FIN
+      
+      // Build content to save
+      // https://wiki.videolan.org/SubViewer/
+      //
+      sContent est une chaîne
+      POUR TOUT e DE m_tabContent
+      	sContent += [RC+RC] + e.TimecodeToString(CSubtitleEntry.tfSVB) + RC + e.m_sText
+      FIN
+      
+      // To write in version 2 of subviewer, replace CRLF with "[br]".
+      
+      RENVOYER fSauveTexte(sFilename,ChaîneVersUTF8(sContent))
+     type : 458752
+   -
+     name : _LoadDecodeSRT
+     procedure_id : 1737960779824381160
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	sContent (chaîne ANSI) : <indiquez ici le rôle de sContent>
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure protégée _LoadDecodeSRT(sContent est une chaine)
+      
+      e est un CSubtitleEntry dynamique
+      
+      // Load each lines on the SRT file and fill the content.
+      POUR TOUTE CHAÎNE sLine DE sContent SÉPARÉE PAR RC
+      	// New srt entry (his is a integer number)
+      	SI Val(sLine) > 0 _ET_ Val(sLine) = sLine ALORS
+      		// Add any previous entry
+      		SI e <> Null _ET_ e.m_nID > 0 ALORS
+      			TableauAjoute(m_tabContent,e)
+      		FIN
+      
+      		// Create new entry
+      		e		= allouer un CSubtitleEntry
+      		e.m_nID	= sLine
+      		CONTINUE
+      	FIN
+      
+      	// Is this the timecode line?
+      	SI sLine [=] " --> " ALORS
+      		e.TimecodeFromString(CSubtitleEntry.tfSRT,sLine)
+      		CONTINUE
+      	FIN
+      
+      	// This is obviously text line
+      	SI sLine <> "" ALORS
+      		e.m_sText += [RC] + sLine
+      	FIN
+      FIN
+      
+      // Just in case the last SRT entry was not written (because the last line has no empty line after)
+      SI e <> Null _ET_ e.m_nID > 0 ALORS
+      	TableauAjoute(m_tabContent,e)
+      	e = Null
+      FIN
+      
+     type : 458752
+   -
+     name : _LoadDecodeSBV
+     procedure_id : 1737960779824446696
+     type_code : 12
+     code : |1+
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Paramètres :
+      //	sContent (chaîne ANSI) : <indiquez ici le rôle de sContent>
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure protégée _LoadDecodeSBV(sContent est une chaine)
+      
+      e		est un CSubtitleEntry dynamique = allouer un CSubtitleEntry
+      
+      // SBV format is expected to have:
+      // - first line as timecode
+      // - other lines as text
+      // - empty line as end of timecode indicator
+      
+      // Load each lines on the SRT file and fill the content.
+      bSkip	est un booléen
+      POUR TOUTE CHAÎNE sLine DE sContent SÉPARÉE PAR RC
+      	// Skipping potential "additionnal information" section and control codes
+      	si sLine = "[INFORMATION]" alors
+      		bSkip = Vrai
+      		continue
+      	FIN
+      	si bSkip alors
+      		si sLine = "[END INFORMATION]" alors
+      			bSkip = Faux
+      		FIN
+      		continue
+      	FIN
+      	si sLine [= "[" alors
+      		continue
+      	FIN
+      
+      	// Empty line (new entry?)
+      	SI sLine = "" ALORS
+      		si e <> Null _ET_ e.m_duTimecodeEnd..EnMillisecondes <> 0 alors
+      			// Add any previous entry
+      			e.m_nID = TableauOccurrence(m_tabContent) + 1	// SBV files do not have an ID. We create one because we need it internally for different processses.
+      			TableauAjoute(m_tabContent,e)
+      			e = Null
+      		fin
+      
+      		// Create new entry
+      		si e = Null alors
+      			e = allouer un CSubtitleEntry
+      		fin
+      
+      		CONTINUE
+      	FIN
+      
+      	// The first non-empty line is always the timecode
+      	si e.m_duTimecodeEnd..EnMillisecondes = 0 alors
+      		// Transform the sbv timecode to SRT timecode
+      		e.TimecodeFromString(CSubtitleEntry.tfSVB,sLine)
+      		continue
+      	FIN
+      
+      	// This is a text line
+      	e.m_sText += [RC] + replace(sLine,"[br]",crlf)	// SBV version 2 allows CRLF to be replaced with [br] placeholder. We want the text as SRT.
+      FIN
+      
+      // Just in case the last SRT entry was not written (because the last line has no empty line after)
+      SI e <> Null _ET_ e.m_duTimecodeEnd..EnMillisecondes <> 0 ALORS
+      	e.m_nID = TableauOccurrence(m_tabContent) + 1	// SBV files do not have an ID. We create one because we need it internally for different processses.
+      	TableauAjoute(m_tabContent,e)
+      	e = Null
+      FIN
+     type : 458752
+   -
+     name : CalculateTimecodeContinuity
+     procedure_id : 1737960779824512232
+     type_code : 12
+     code : |1+
+      // Résumé : Calculate timecode continuity.
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure CalculateTimecodeContinuity()
+      
+      pour i = 2 _à_ m_tabContent..Occurrence
+      	m_tabContent[i].m__bTimecodeNotContinuous = m_tabContent[i-1].m_duTimecodeEnd <> m_tabContent[i].m_duTimecodeStart
+      FIN
+     type : 458752
+   -
+     name : GetLastTimecodeEnd
+     procedure_id : 1737960779824577768
+     type_code : 12
+     code : |1+
+      // Résumé : Get the last timecode ending time.
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	durée : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure GetLastTimecodeEnd() : durée
+      
+      si m_tabContent..Occurrence > 0 alors
+      	renvoyer m_tabContent[m_tabContent..Occurrence].m_duTimecodeEnd
+      FIN
+      
+      renvoyer ""
+     type : 458752
+   -
+     name : TimecodesIdenticalWith
+     procedure_id : 1737960779824643304
+     type_code : 12
+     code : |1+
+      // Résumé : Check if the timecodes are identical with another file.
+      // Paramètres :
+      //	c (CSRTFile dynamique) : Other file to check against.
+      // Valeur de retour :
+      // 	booléen : True if both files have identical timecodes.
+      //
+      procédure TimecodesIdenticalWith(c est un CSubtitle dynamique) : booléen
+      
+      si c = Null alors
+      	renvoyer vrai
+      FIN
+      
+      SI m_tabContent..Occurrence <> c.m_tabContent..Occurrence ALORS
+      	renvoyer Faux
+      FIN
+      
+      e est un CSubtitleEntry dynamique
+      POUR TOUT e,i DANS m_tabContent
+      	SI e.m_duTimecodeStart <> c.m_tabContent[i].m_duTimecodeStart _OU_ e.m_duTimecodeEnd <> c.m_tabContent[i].m_duTimecodeEnd ALORS
+      		renvoyer Faux
+      	FIN
+      FIN
+      
+      renvoyer vrai
+     type : 458752
+   -
+     name : ExportToCSV
+     procedure_id : 1737960779824708840
+     type_code : 12
+     code : |1+
+      // Résumé : Will export the file to CSV compatible with ElevenLabs Dubbing project.
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : Filename to write to.
+      //	nOptimizeClips (entier - valeur par défaut=-1) : -1 if clips should not be opimized, all other values will trigger ClipMergeOptimization.
+      //	cTranslation (CSRTFile dynamique - valeur par défaut=0) : Translation file to add to the export. Both files must have identical timecodes.
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure ExportToCSV(sFilename est une chaîne, nOptimizeClips est un entier = -1, cTranslation est un CSubtitle dynamique = Null) : booléen
+      
+      si pas TimecodesIdenticalWith(cTranslation) alors
+      	ErreurDéclenche(1,"Both subtitle files must have identical timecodes. The selected files do not match.")
+      	renvoyer faux
+      FIN
+      
+      si nOptimizeClips > -1 alors
+      	ClipMergeOptimization(nOptimizeClips, cTranslation)
+      FIN
+      
+      // Now we create the CSV file
+      // speaker,start_time,end_time,transcription,translation
+      sCSV est une chaîne = `speaker,start_time,end_time,transcription,translation`
+      POUR TOUT e,i DANS m_tabContent
+      	s est une chaine = e.m__sSpeaker = "" ? "Speaker 1" sinon e.m__sSpeaker
+      	sCSV += [RC] + ChaîneConstruit(`"%1","%2","%3","%4","%5"`, ...
+      	s, ...
+      	e.TimecodeToString(CSubtitleEntry.tfSRT,CSubtitleEntry.tpStart), ...
+      	e.TimecodeToString(CSubtitleEntry.tfSRT,CSubtitleEntry.tpEnd), ...
+      	Remplace(e.TextAsSingleLine(),`"`,`""`), ...
+      	cTranslation <> Null ? Remplace(cTranslation.m_tabContent[i].TextAsSingleLine(),`"`,`""`) sinon "" )
+      FIN
+      
+      // Save the CSV file
+      renvoyer fSauveTexte(sFilename,ChaîneVersUTF8(sCSV))
+     type : 458752
+   -
+     name : RemoveTimecodesOutOfRange
+     procedure_id : 1737960779824774376
+     type_code : 12
+     code : |1+
+      // Résumé : Will delete all timecode entries that are not withing the desired range. This is a destructive process, so work on a copy.
+      // Paramètres :
+      //	duStart (durée) : Start point (inclusive). Before this point, everything will be deleted.
+      //	duEnd (durée) : End point (inclusive). After this point, everything will be deleted.
+      //	duTimecodeOffest (durée - valeur par défaut=0) : If timecodes should be corrected, specify the offset. It will be deducted from the timecodes.
+      //	eActionOnStraddlingTimecodes (CSRTFile.ETimecodeRangeAction) : Action to be taken if a timecode is stranddling on the range. Default action is to trim (adjust) the timecode so to fit.
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure RemoveTimecodesOutOfRange(duStart est une durée, duEnd est une durée, duTimecodeOffest est une durée = 0, eActionOnStraddlingTimecodes est une ETimecodeRangeAction = traTrimEntry)
+      
+      // Prune out timecodes
+      pour i = m_tabContent..Occurrence _A_ 1 pas -1
+      	e est un CSubtitleEntry dynamique <- m_tabContent[i]
+      
+      	// Entry is completely outside of the range
+      	si e.m_duTimecodeEnd < duStart _OU_ e.m_duTimecodeStart > duEnd ALORS
+      		// Remove
+      		TableauSupprime(m_tabContent,i)
+      		continue
+      	fin
+      
+      	// Starting point is outside of the starting range
+      	si e.m_duTimecodeStart < duStart alors
+      		selon eActionOnStraddlingTimecodes
+      			CAS traRemoveEntry:
+      				TableauSupprime(m_tabContent,i)
+      
+      			CAS traTrimEntry:
+      				e.m_duTimecodeStart = duStart
+      				si (e.m_duTimecodeEnd - e.m_duTimecodeStart) < 1000 alors
+      					TableauSupprime(m_tabContent,i)
+      				FIN
+      		FIN
+      		continue
+      	fin
+      
+      	// Ending point is outside of the ending range
+      	SI e.m_duTimecodeEnd > duEnd ALORS
+      		SELON eActionOnStraddlingTimecodes
+      			CAS traRemoveEntry:
+      				TableauSupprime(m_tabContent,i)
+      
+      			CAS traTrimEntry:
+      				e.m_duTimecodeEnd = duEnd
+      				SI e.m_duTimecodeEnd - e.m_duTimecodeStart < 1000 ALORS
+      					TableauSupprime(m_tabContent,i)
+      				FIN
+      		FIN
+      		continue
+      	FIN
+      
+      FIN
+      
+      // Correct timecode
+      si duTimecodeOffest..EnMillisecondes > 0 alors
+      
+      	pour tout e de m_tabContent
+      		e.m_duTimecodeStart	= e.m_duTimecodeStart - duTimecodeOffest
+      		e.m_duTimecodeEnd	= e.m_duTimecodeEnd - duTimecodeOffest
+      	FIN
+      
+      FIN
+     type : 458752
+   -
+     name : CalculateSpeakerChange
+     procedure_id : 1738311005448731556
+     type_code : 12
+     code : |1+
+      // Résumé : Calculate speaker switching.
+      // Paramètres :
+      // 	sSpeaker1 (chaîne ANSI - valeur par défaut="Speaker 1") : Name of Speaker 1
+      // 	sSpeaker2 (chaîne ANSI - valeur par défaut="Speaker 2") : Name of Speaker 2
+      // Valeur de retour :
+      // 	Aucune
+      //
+      procédure CalculateSpeakerChange(sSpeaker1 est une chaine = "Speaker 1", sSpeaker2 est une chaine = "Speaker 2")
+      
+      bSwitch est un booléen
+      n est un entier = m_tabContent..Occurrence
+      
+      POUR i = 1 _À_ n
+      	m_tabContent[i].m__sSpeaker = bSwitch = Faux ? sSpeaker1 SINON sSpeaker2
+      	si i+1 <= n _ET_ m_tabContent[i].m_duTimecodeEnd <> m_tabContent[i+1].m_duTimecodeStart ALORS
+      		bSwitch = pas bSwitch
+      	FIN
+      FIN
+     type : 458752
+   -
+     name : TimecodesToYAMLSequenceOfCompactMappings
+     procedure_id : 1740092690090315318
+     type_code : 12
+     code : |1+
+      // Résumé : Exports the timecode information to YAML document
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	chaîne ANSI : <indiquez ici le rôle de la valeur de retour>
+      //
+      //	y (YAML) : Yaml variable to fill with the timecodes (direct filling, considered as an array)
+      procédure TimecodesToYAMLSequenceOfCompactMappings() : chaine
+      
+      LF est un chaine = Caract(10)
+      s est une chaine
+      
+      pour tout e,i de m_tabContent
+      	s += [LF] + "- " + "{" + " id: " + e.m_nID + ", i: " + DuréeVersChaîne(e.m_duTimecodeStart,"HH:MM:SS.CCC") + ", o: " + DuréeVersChaîne(e.m_duTimecodeEnd,"HH:MM:SS.CCC") + " }"
+      FIN
+      
+      renvoyer s
+     type : 458752
+   -
+     name : TimecodesFromYAML
+     procedure_id : 1740112968090671115
+     type_code : 12
+     code : |1+
+      // Résumé : Import timecodes from YAML document.
+      // Paramètres :
+      //	y (YAML) : YAML node containing a sequence of mappings (id, i, o)
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure TimecodesFromYAML(y est un yaml)
+      
+      // We allow overriding existing timecodes, only if the count matches
+      bNewEntries est un booléen = Vrai
+      
+      si m_tabContent..Occurrence > 0 alors
+      	si m_tabContent..Occurrence <> y..Occurrence alors
+      		ErreurDéclenche(100, "The number of timecodes does not match. Unable to import the new timecodes.")
+      		renvoyer faux
+      	FIN
+      	bNewEntries = Faux
+      FIN
+      
+      pour i = 1 _a_ y..Occurrence
+      	si bNewEntries alors
+      		ajoute(m_tabContent)
+      	FIN
+      
+      	m_tabContent[i].m_nid				= y[i].id
+      	m_tabContent[i].m_duTimecodeStart	= ChaîneVersDurée(y[i].i..Valeur, y[i].i..Type = 25 ? "HHMMSSLLL" SINON "HH:MM:SS.LLL")
+      	m_tabContent[i].m_duTimecodeEnd		= ChaîneVersDurée(y[i].o..Valeur, y[i].i..Type = 25 ? "HHMMSSLLL" SINON "HH:MM:SS.LLL")
+      FIN
+      
+      renvoyer vrai
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x17e5b16407d0f1fb
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAADnl3uxgA6ylw4vtqUKEOJQD3VAAOKeNUmhPNojcRFoDpHEcUyYAw==

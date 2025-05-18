@@ -1,0 +1,249 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CEDLReader
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+ options : 256
+class :
+ identifier : 0x181528cc2a5e8dc2
+ internal_properties : HwAAAB4AAAD+1kTo6KJy2WQU0Y4fbFD6aQ7NWfD4KKkN7Ml67nIqLXIRxJ1vjfJ1
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+      
+      //
+      // A simple EDL reader to parse EDL data more easily.
+      //
+      
+      CEDLReader est une Classe
+      	m_sTitle				est une chaîne					// Name or title of the EDL, specified in the TITLE header (e.g., "EDL Filename")
+      	m_sFCM					est une chaîne					// Frame code mode, specifies timecode format, e.g., "DROP FRAME" or "NON-DROP FRAME". See SuggestFPS().
+      	m_tabEntries			est un tableau de SEDLEntry		// Actual EDL entries.
+      	//
+      	m_rFPS					est un réel						// FPS to use for frame to time conversion.
+      	m_eDropFrameAdjustment	est un EDropFrameAdjustment		// What kind of adjustment should be applied when calculating the timecodes (see TimecodeToDuration()).
+      fin
+      
+      SEDLEntry est une Structure
+      	sEditNumber			est une chaîne		// Sequential identifier for each edit event, typically a three-digit number (e.g., "001")
+      	sReel				est une chaîne		// Identifier for the source media or reel, often a short alphanumeric code (e.g., "001")
+      	sTrackType			est une chaîne		// Type of media track, e.g., "V" for video, "A" for audio
+      	sEditType			est une chaîne		// Type of edit or transition, e.g., "C" for cut, "D" for dissolve
+      	sTransitionDuration	est une chaîne		// Duration of transition in frames, used for dissolves or wipes (e.g., "030")
+      	sSourceIn			est une chaîne		// Start timecode of the source clip (e.g., "00:00:55:06")
+      	sSourceOut			est une chaîne		// End timecode of the source clip (e.g., "00:00:55:07")
+      	sRecordIn			est une chaîne		// Start timecode in the timeline (e.g., "00:00:55:06")
+      	sRecordOut			est une chaîne		// End timecode in the timeline (e.g., "00:00:55:07")
+      	sComments			est une chaîne		// Optional metadata or comments, often pipe-delimited (e.g., "|C:ResolveColorGreen|M:Note")
+      FIN
+      
+      EDropFrameAdjustment est une énumération
+      	dfaNone					= 0		// No drop-frame adjustment is applied; the timecode aligns with the timeline.
+      	dfaAddDropFrame			= 1		// Adds drop-frame compensation to the timecode to correct for drift occurring earlier than the timeline.
+      	dfaSubstractDropFrame	= -1	// Subtracts drop-frame compensation from the timecode to correct for drift occurring later than the timeline.
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1735338088770538946
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1735338088770604482
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : ReadEDL
+     procedure_id : 1735340682950985572
+     type_code : 12
+     code : |1+
+      // Résumé : Read an EDL file into class fields.
+      // Paramètres :
+      //	sFilename (chaîne ANSI) : <indiquez ici le rôle de sFilename>
+      // Valeur de retour :
+      // 	booléen : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure ReadEDL(sFilename est une chaine) : booléen
+      
+      si pas fFichierExiste(sFilename) ALORS
+      	ErreurDéclenche(1,"The file [%sFilename%] does not exist.")
+      	RENVOYER Faux
+      FIN
+      
+      sEDL est une chaine = UTF8VersChaîne(fChargeTexte(sFilename))
+      si sEDL = "" _ET_ ErreurDétectée ALORS
+      	ErreurDéclenche(2,"Unable to open file [%sFilename%]." + rc + erreurinfo())
+      	renvoyer faux
+      FIN
+      
+      m_sTitle			= ""
+      m_sFCM			= ""
+      tableausupprimetout(m_tabEntries)
+      
+      s est une chaine
+      n est un entier
+      pour TOUTE CHAÎNE s DE sEDL SÉPARÉE PAR rc
+      	s = sansespace(s)
+      
+      	si s = "" ALORS
+      		n = 0
+      		continue
+      	FIN
+      
+      	si s [= "TITLE:" ALORS
+      		m_sTitle = sansespace(s[[7 a]])
+      		continue
+      	FIN
+      
+      	si s [= "FCM:" alors
+      		m_sFCM = sansespace(s[[5 a]])
+      		continue
+      	FIN
+      
+      	si "0123456789" [=] s[[1]] _ET_ "0123456789" [=] s[[2]] _ET_ "0123456789" [=] s[[2]] alors
+      		// Data line
+      		n = TableauAjoute(m_tabEntries)
+      		s1 est une chaine = ""
+      		TANTQUE s1 <> s
+      			si s1 <> "" alors s = s1
+      			s1 = Remplace(s,"  "," ")
+      		FIN
+      		tabFields est un tableau de chaînes = ChaîneDécoupe(s, " ")
+      		m_tabEntries[n].sEditNumber	= tabFields[1]
+      		m_tabEntries[n].sReel		= tabFields[2]
+      		m_tabEntries[n].sTrackType	= tabFields[3]
+      		m_tabEntries[n].sEditType	= tabFields[4]
+      		si m_tabEntries[n].sEditType dans ("D","W") _ET_ tabFields..Occurrence > 8 alors
+      			m_tabEntries[n].sTransitionDuration	= tabFields[5]
+      			m_tabEntries[n].sSourceIn	= tabFields[6]
+      			m_tabEntries[n].sSourceOut	= tabFields[7]
+      			m_tabEntries[n].sRecordIn	= tabFields[8]
+      			m_tabEntries[n].sRecordOut	= tabFields[9]
+      		sinon
+      			m_tabEntries[n].sSourceIn	= tabFields[5]
+      			m_tabEntries[n].sSourceOut	= tabFields[6]
+      			m_tabEntries[n].sRecordIn	= tabFields[7]
+      			m_tabEntries[n].sRecordOut	= tabFields[8]
+      		FIN
+      		continue
+      	FIN
+      
+      	// Everything else is added into the comment section
+      	si n > 0 alors
+      		m_tabEntries[n].sComments += [rc] + s
+      		continue
+      	FIN
+      
+      FIN
+      
+      renvoyer vrai
+     type : 458752
+   -
+     name : SuggestFPS
+     procedure_id : 1735365770137822555
+     type_code : 12
+     code : |1+
+      // Résumé : Will send an FPS suggestion based on the FCM entry. This is no guarantee, but can be a good starting point.
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	réel : Suggested fps to start with.
+      //
+      procédure SuggestFPS() : réel
+      
+      SELON m_sFCM
+      	CAS "DROP FRAME":		renvoyer 29.97
+      	CAS "NON-DROP FRAME":	RENVOYER 29.97 //30
+      	CAS "FILM":				RENVOYER 24
+      	CAS "PAL":				RENVOYER 25
+      	AUTRE CAS:				RENVOYER 29.97
+      FIN
+     type : 458752
+   -
+     name : FrameToMilliseconds
+     procedure_id : 1735366362850787404
+     type_code : 12
+     code : |1+
+      // Résumé : Convert a frame to milliseconds.
+      // Paramètres :
+      //	nFrame (entier) : Frame number.
+      //	rFPS (réel) : FPS.
+      // Valeur de retour :
+      // 	entier : Milliseconds (0 to 999).
+      //
+      procédure FrameToMilliseconds(local nFrame est un entier, rFPS est un réel = m_rFPS) : entier
+      
+      renvoyer (nFrame / rFPS * 1000)
+     type : 458752
+   -
+     name : TimestampToDuration
+     procedure_id : 1735368458904499578
+     type_code : 12
+     code : |1+
+      // Résumé : Converts a timestamp to duration
+      // Paramètres :
+      //	sTimecode (chaîne ANSI) : EDL timestamp to convert.
+      //	rFPS (réel) : FPS to use to convert the frame into milliseconds.
+      //	eAdjustForDropFrame (CEDLReader.EDropFrameAdjustment) : Timecode adjustment to apply due to non-drop frame or drop frame drifts.
+      // Valeur de retour :
+      // 	durée : Duration of this timestamp.
+      //
+      procédure TimestampToDuration(local sTimecode est une chaîne, rFPS est un réel = m_rFPS, eAdjustForDropFrame est un EDropFrameAdjustment = m_eDropFrameAdjustment) : durée
+      
+      // Some timecode format have ; , . for the last portion (drop-frame or not, etc).
+      sTimecode	= Remplace(sTimecode,[";",",","."],":")
+      
+      d est une durée
+      d..Heure = extraitchaine(sTimecode, rangPremier, ":")
+      d..Minute = extraitchaine(sTimecode, rangSuivant, ":")
+      d..Seconde = ExtraitChaîne(sTimecode, rangSuivant, ":")
+      nFrames est un entier = ExtraitChaîne(sTimecode, rangSuivant, ":")
+      
+      SI eAdjustForDropFrame = dfaNone ALORS
+      	d..Milliseconde = FrameToMilliseconds(nFrames)
+      SINON
+      	// - Calculate total number of frames
+      	rFrames			est un réel	= (d..EnSecondes * rFPS) + nFrames
+      
+      	// - Calculate drop-frame compensation (NTSC: 2 frames dropped every minute, except every 10th)
+      	nDroppedFrames	est un entier	= ( PartieEntière(d..EnMinutes) - PartieEntière(d..EnMinutes / 10) ) * 2
+      
+      	// Add or remove the frames
+      	SI eAdjustForDropFrame = dfaAddDropFrame ALORS
+      		rFrames += nDroppedFrames
+      	SINON
+      		rFrames -= nDroppedFrames
+      	FIN
+      
+      	// Recalculate timecode
+      	d..EnSecondes = rFrames / rFPS
+      FIN
+      
+      RENVOYER d
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x181528b12a5b2709
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAADnl3uxgA6ylw4vtqUKEOJQD3VAAOKeNUmhPNojcRFoDpHEcUyYAw==

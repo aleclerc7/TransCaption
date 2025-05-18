@@ -1,0 +1,253 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : FI_Index
+ major_version : 30
+ minor_version : 0
+ type : 8
+ description : ""
+ subtype : 0
+ options : 256
+window :
+ name : FI_Index
+ identifier : 0x28155cac880e313f
+ internal_properties : HwAAAB4AAADQXibHJBr0xooq7v6OcmbUfWTjVvyjKrOCkThiLM7U17YjN+mbeWvtym6tduNg6A3MrnVt8v1FCJC0P/WVRaik8K3zrxCdyfcIX9KLsvDA5P9gLrN6B4K1/Kw4y+Gyr0BOvwaEvXMg55QfggmaD98CSH6PMzx94X1tNocoTDNUUwVVGhtonpB98H0EQdbW62GMDsG8ix971WZas/UbL/Lgmzpx8u2PLfC0b4LxFYXphFKkZ9M4UWsCWAimp+nUsEmgdF5a6GCPHosLhLEgqMEw7yvmHOxp7KSSl0qkuDEg8wuHb8BHP9kgYLWM/BZmXCuD4cRd96k7Z72dWrT7RocD1ji0wwsh/aYZlwCorBynaEZUXnL9YkaVGUL/NM+TquFGrep3YNJ43RXUpEX+q/YXO1vcVMDhEYzWK22XAV65g1Ce48wJRlokh0qnqAAU81Wfd7P7wNqd6zApzmOnzpVoPM1fkOcq+J8yw+Fiv1Zo7FKKSHFG2MVMB8bVEqUzHfuD93eD6C6KAU65NaTMoX+tJsz2W2hoiVN9qfx6jfLyDfu+ToAjUXZD4Xo4jOOjQAfryQ6Q9EwRtY49fGPzSnkZEXvaNGU0sVCZzceSWY8bXs3oT9la5Y/8GxL5ullZ05mZBIczWMSelGN1zXBOfpq3CRi441+U325dNMtsAkGbwsii7qOwJ+5jvlT9qHHhb3AcBgIyyeqBkY2QNYpiPxe9/qINUkEIZCqAspeJDyfMucWgKZ+ERgpOFcNP
+ properties :
+  width : 640
+  height : 480
+ style : {}
+ controls :
+  -
+    name : FI_Index
+    identifier : 0x28155cac880f313f
+    internal_properties : HwAAAB4AAAD8G8tNDcn93Zk43ek8HyQmNtd1miXGvSt3LYAwv0a1LWHPyevoLHDYB5tPMCV3GEHjiEtwNaQwlL3gmQwuzpBHn+FT/7iuq/YPJatbWTER9x6BjrQ2a0/DcIIz/V/nENb1W0ZHVDLJQYaZg+tgAnmT/vQVU58ij8ZkZk3K12Eb50ORgZaQ0MnBTZYo30vk9LJtXwcReWT5eX1Ja8r34yjJJmDq5DeHsD8JeQwsmb7c9j7tPUYnE2+9h/qTM57o+KxVyEI8LMC0kxjM2iNgYsVjCBKXhCsxTESX7YXdUexjja7mHEjdvttZ8UywSqdsidVSJvNOcCxuM0vqDD21res+m3kvGJJimkpzI4jovrIF3mSMn3EEOc8u1HuzyzGseBwTr8F/bSaoFOe16lexC/E+1LS3E1x27JT6xVRNKifU0L/CkW9jn3Ot3bhUPMr4WNvbjnc2+27TqzdYwJs=
+    properties :
+     width : 640
+     height : 480
+     tab_order : 0
+    style : {}
+    controls :
+     -
+       name : BTN_Copy
+       identifier : 0x28156a06cbd85aa4
+       internal_properties : HwAAAB4AAABywwHLr2q5SY+Oy65fivQjSQxAFgKC8joMptgbR8cRCODdGiaxsx/C6V+SKKQzpNzJmK8I74XpUxPq4QFNtJifBeIGsg92/OkDLIPOkf0CbXGAwq/xe/rO5I02QMtz1xtgt3uvgzwexKtOvsxhGNDDOK5Sb9XqxMRSve9zF6McYtb5V0JhAxsEeYLP9qL2OQ5QDhxmsrw8tAfNqU/lwH4kwQAwSAfeyO4Lpu3jITWvaBv8cFXPIM+UMghIWV0U8JbgDVOaBNCEqRGwvoxFhcV1xBjim0+o7BAYSVIsl3l5+drR2pCv7MbXeb1dk86zkAvbqTJZf7eFra7gVIGmR4LMq0YtQKONVn2OzcMOdOvXPTM/AixnzCk+0c7zeQesyiNJYaRGG3zn98k/rULsDXWgBasvqzKmohhN3bIlD4OxH9OZBD9vJ6I9PZw0lC+GnIlLTGKxB5SCkLKt8viVLSrmWi16WV+gLy12HQOhcrhKQ2ZTWesVAtrzoy+1Bt/rSbEbDmucOtE1H4nOmhvxduxwI45+YvuO6jqaZ1JG+cY4XCiE0pdOybF4/gsDxmJJuyVYLCNoVxhhj2jyTnW0lCMGbIlOcW55CrhGOQF1JTARlvAE6fA6itTkY7pzT7c2g8/Xv9aXg7waf5OQnrM7Nsm1bhV1DwG+75G/XJO0mqx805wRBNV1oiuFjSH9dlybGKvYOcoHLljziwhMPs2IUsvvU196E62j7DLTb87s4q7WrpTyXhminBlqzc19qjJYSXDxhdrKQlqW6+ENmA4LDEgXlXqpSn4z20dmyP/PyKArs/BFCgpIPmVB3RJz1HQrhxTH3nW403SZhc2RW5Qe0tREQdUs8j3jDseTiXJulPwebjcoADOjYZ0iMZwMj0e/wgPMVUcdtVNAkBPce0qdHExwL/ABkwDcckDTtKCV+RjcsKGbbpuklc0zOtfFLgIlBaDT9rpJgJmACD6ZCD04LVjYEe0OliJqglHzi9tWJwBgNHFXf0UzDTeqiZKi/Lx6+5f4O0h8yIwdEc8//lefUKaqUYs9/PhVtKL9KECyQgXMgPlJqieqQEh7S+KYX5WTK7Mc70xyz41P8l7Uio485q2bWaJnq0A8S2lsYQpnfeNRc6w5XmYJpTIJZasElofCF8vJVt/o
+       properties :
+        x : 530
+        y : 4
+        width : 106
+        height : 31
+        anchor : 4
+        tab_stop : 0
+        take_focus : 0
+        accelerator_key : 65535
+        tab_order : 0
+       style : {}
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            
+            s est une chaine = HTMLVersTexte(EDHTML_SansNom1)
+            
+            // Why this verification?
+            // - Here, we do not really need it.
+            // - But this is also an experiment. If the user paste accentuated content from other web pages here,
+            //   then copy, sometimes the HTMLVerstTexte() function does not return UTF8 content any more.
+            //   (For whatever reason known to PCSOFT only.) So to avoid getting improperly formatted content
+            //   in the clipboard, we check if it is truely UTF8 first, if yes, convert to text.
+            
+            si UTF8Valide(s) ALORS
+            	VersPressePapier(UTF8VersChaîne(s))
+            SINON
+            	VersPressePapier(s)
+            FIN
+            
+            ToastAffiche("Index copied to clipboard.")
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : LIB_OpenFile
+       identifier : 0x28156d2ed919af32
+       internal_properties : HwAAAB4AAADR8rKlrXs1La1SI+FSxV08+mG14DyTjsuM5OFPJYln6hIqJ+tJeVXsGRGQWctHSRE4+AYURQHpl0H8aZv9EaGhGQv4E4yZ9nDLYBjEiSNNpxY1WJGlN7/lXkJhHbmRDGSX5+EowZAgkBk7GX58EbZkeKLtKUAqwYQCJxNjTyMmR46GMqKdEWWgpvf0C2aaQxzAefRuK0I8SVTdtq9eHA/qMzfDakgs0M+SQeklFuISo79LOqa1TIv2WaAEpoffGw18XEXpNBZ7eXPzPFP98IE7JFYpm9XKsPPe9Kx6KR4PlK5M1pZKfMATnGgTspnALlG+wuChy7Y6O1cNWsBQ+ArxNehXTZVbuOeY+IZ2a2V3YlISva3VCMkXm5S0pKcSXi1QRed4MnqzjnGVkcqxICGw3BG4v9KjobtKcIOAXxTGN1W0Wg9uY+ZstOab7Ou6fF9yF7bsaej3n/RBqOa6PiTLHlS/JZLOsUwBoo9gA+t4Anaa+WjQ+PtMlPRXdqKUZasZ/SWu3F1ahMe+Y2bz62qrSxC6WU08wy2gI1ehH4xpDERz1LwD5wDVSNDvWZLaJA==
+       properties :
+        x : 4
+        y : 4
+        width : 518
+        height : 31
+        anchor : 8
+        tab_stop : 0
+        take_focus : 0
+        markdown : 1
+       style : {}
+       type : 3
+       code_elements :
+        type_code : 2
+        p_codes :
+         -
+           code : |1+
+            
+            globale
+            sFilename est une chaine
+            
+            MoiMeme = MarkdownLien("**Open EDL File**", OpenFile)
+           type : 14
+        procedures :
+         -
+           name : OpenFile
+           procedure_id : 1735424298537440211
+           type_code : 14
+           code : |1+
+            // Résumé : <indiquez ici ce que fait la procédure>
+            // Paramètres :
+            //	Aucun
+            // Valeur de retour :
+            // 	Aucune
+            //
+            procédure OpenFile()
+            
+            // Open the file
+            sFile est une chaîne = SelectFilename("","edl")
+            SI sFile = "" ALORS
+            	RETOUR
+            FIN
+            sFilename = sFile
+            
+            sIndex	est une chaîne
+            c		est un CEDLReader
+            SI c.ReadEDL(sFilename) ALORS
+            	// Confirm the fps with the user
+            	// Ask for the FPS
+            	sColor					est une chaine
+            	si pas ouvre(FEN_EDL_Settings, c, sColor) ALORS
+            		retour
+            	FIN
+            	si c.m_rFPS < 0 alors
+            		c.m_rFPS = c.SuggestFPS()
+            	FIN
+            
+            	// Load the "Record" In/Out as they are the timecodes for the timeline
+            	POUR TOUT e DE c.m_tabEntries
+            		si sColor <> "" _ET_ pas e.sComments [=] "|C:"+sColor alors
+            			continue
+            		FIN
+            
+            		d est une durée = c.TimestampToDuration(e.sRecordIn)
+            
+            		// Built timecode
+            		sIndex += [RC] + d..Heure > 0 ? DuréeVersChaîne(d,"HH:MM:SS") SINON DuréeVersChaîne(d,"MM:SS")
+            
+            		// Get a description
+            		SI e.sComments <> "" ALORS
+            			sIndex += [" "] + SansEspace(ExtraitChaîneEntre(e.sComments,1,"|M:","|"))
+            		FIN
+            	FIN
+            FIN
+            
+            EDHTML_SansNom1	= sIndex
+            MonChamp		= "Index from **" + MarkdownLien(Remplace(sFilename,"\","\\"), OpenFile) + "**"
+            
+            // Define the pane title
+            cPane est un Champ
+            cPane <- VoletDuChamp(MoiMême)
+            SI cPane <> Null ALORS cPane..Libellé = BuildPanelTitle("Index from EDL", sFilename)
+           type : 458752
+        procedure_templates : []
+        property_templates : []
+     -
+       name : EDHTML_SansNom1
+       identifier : 0x281669cd1bcf75d2
+       internal_properties : HwAAAB4AAAAtlBrgfP2Bn7AAatZkK35azoO7WnL6aw2eu3R+5Ob+++MWHaGYEotcQBHyGmUkcDEUrnAakx6sEsJ4KbVfBoEY72TSqwUCQXGTkFP/RBrVRemXK7Owqq0NNYvFmGaaF2izRhbCIpQIvfFnvlRPWPOh5cyxq7f4RDFTVJz7NjaXSls93kJIXLU5yq27oF/ioC6KlQE0cG2S3xJdlEhl8U/G7z71gnFrZc9YfAZrPIA2XgU2jHNA8+bsY/oNVz88JnGOw5gcVOLjb+GhtHs+ZXB3y4+ztU7pQRj3VFvFYtoDPL6+4BH72/99VAcmgY0/ifPOYM/91kFzkRdbdfjJc8wA46B5gRGst/NUU7OPro4ot+ni63xAkt4w88IHpM8biszZKYprGeNxru0MpACn5VBel4sofVWHfaYd5vTTE0jfJTyggjRkmyHWUNAARChnvJ3X8kRMo5Yb11yr8EyZe9QnXhX5K73X7goHPw==
+       properties :
+        y : 43
+        width : 640
+        height : 437
+        anchor : 10
+        tab_order : 0
+       style : {}
+       type : 134
+       code_elements :
+        type_code : 158
+        p_codes :
+         -
+           code : |1+
+            PROCÉDURE ModificationSélection(selectionHTML est un edtHTMLSélection)
+           type : 288
+         -
+           code : |1+
+            PROCEDURE ChargementRessources(sUrl est chaine, nType est entier)
+            // nType donne le type de ressource à télécharger
+            // exemple : typehtmlResImage, typehtmlResScript, typehtmlResCss, typehtmlResXMLHttpRequest, typehtmlAutre
+            // ATTENTION : ce traitement est appelé depuis un thread secondaire
+            
+            RENVOYER Vrai
+           type : 289
+    type : 32
+    code_elements :
+     type_code : 70
+     p_codes :
+      -
+        code : |1+
+         PROCEDURE MaFenêtre()
+      -
+        code : |1+
+         
+         // Define the pane title
+         cPane est un Champ
+         cPane <- VoletDuChamp(MoiMême)
+         SI cPane <> Null ALORS cPane..Libellé = BuildPanelTitle("Index from EDL")
+         
+         LIB_OpenFile.OpenFile()
+        type : 14
+      -
+        code : |1+
+         
+         
+        type : 234
+      -
+        code : |1+
+         
+         
+        type : 43
+      -
+        code : |1+
+         
+         
+        type : 42
+      -
+        code : |1+
+         
+         
+        type : 2
+      -
+        code : |1+
+         
+         
+        type : 17
+ menu :
+  name : _Menu
+  identifier : 0x28155c998802e88e
+  internal_properties : HwAAAB4AAACtcPsJy2RVJ4bBHwRSjs1nJOrDLarDGsUU+7Q19aeu2bTT8KkZLe+Jy337vheWuNOBzHrslcTV8GVGQnnKH4KqUi8h8pOsbo6e3w8u9BoJ9QGgmPIVrsg7+vfhfRRmW79vMyFSlYTnMPSVYoylMI+MkK1MlXwldIvhAUMUf0nS+ypJ/l+AjQqTiG1BHMfQz/kiv5Xv3pAGmXsVFFeJm5R7MdOXa6UBpDCjXgE0x+pN+lWXzvpEOB4Ak0Ypb534Q+WUlogzl0XaPG7rixp91FahlMuh5X4jAxSHIqKR6pjS
+  properties : {}
+  style : {}
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar : {}
+ actionbar : {}
+ code_elements :
+  type_code : 71
+  p_codes : []
+ code_parameters :
+  internal_properties : HwAAAB4AAAB7MB8NZB5rGUbyk77+IjQnJ74vm430Ar3yq0zmP05sGBBw0ur17uG6ZWry
+  original_name : FI_SansNom1
+resources :
+ string_res :
+  identifier : 0x18155c9963c4e88e
+  internal_properties : HwAAAB4AAAA809Qj/IAi+r8QXyrnW7sarQeYORCUjKBkmMeTFexSj5AuvTfTUpN0Eg==
+custom_note :
+ internal_properties : HwAAAB4AAAAw1yJwJOWnBFt8iy6Ww8JWR1G08XnjNT9VuwnlXBOxjoNDueSgBJd4Fg==
