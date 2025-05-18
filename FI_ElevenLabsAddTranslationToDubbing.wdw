@@ -157,6 +157,8 @@ window :
      p_codes :
       -
         code : |1+
+         /* Copyright 2025 Alexandre Leclerc. MPL 2.0. See https://mozilla.org/MPL/2.0/. */
+         
          PROCEDURE MaFenêtre()
       -
         code : |1+
