@@ -241,6 +241,33 @@ procedure_set :
       
       sReturn = GetParam(sParam, sDefault)
      type : 458752
+   -
+     name : GetAppVersion
+     procedure_id : 1740976598451196928
+     type_code : 15
+     code : |1+
+      // Résumé : Returns nicely formated version number.
+      // Paramètres :
+      //	bLongVersion (chaîne ANSI - valeur par défaut=1) : <indiquez ici le rôle de bLongVersion>
+      // Valeur de retour :
+      // 	chaîne ANSI : <indiquez ici le rôle de la valeur de retour>
+      //
+      procédure GetAppVersion(bLongVersion est une chaine = Vrai) : chaine
+      
+      // App version
+      
+      // - Long version number (keep last part only if not used, i.e., the final .0 is removed)
+      sAppVersionLong est une chaîne = ExeInfo(exeVersionFormatWindows)
+      SI sAppVersionLong =] ".0" ALORS sAppVersionLong = Gauche(sAppVersionLong, Taille(sAppVersionLong)-2)
+      
+      si bLongVersion = Vrai ALORS
+      	renvoyer sAppVersionLong
+      sinon
+      	sAppVersionShort est une chaîne = sAppVersionLong[[1 À PositionOccurrence(sAppVersionLong,".",2)-1]]
+      	SI sAppVersionShort = "" ALORS sAppVersionShort = sAppVersionLong
+      	RENVOYER sAppVersionLong
+      FIN
+     type : 458752
   procedure_templates : []
   property_templates : []
  code_parameters :

@@ -575,6 +575,29 @@ window :
       -
         type : 293
         enabled : false
+  -
+    name : LIB_SansNom1
+    identifier : 0x28292f080793eeaa
+    internal_properties : HwAAAB4AAAD9dG3muukcbwxMoyFUsg6WPVVwhVm4wB6BnFwld7RPmcfO5FOQ49EOO/hx62GVMemH1UJiXUy2XQ5+Tqe6/Nv5JdxEoictuCO8ar3QpwYzg+fkvBSZRbgfH9Oeb8krpzcILRovfhonOOdJ7xzOvtvjqWm5o0dmAupR2TQkxvHswDCoVsRlKUQad+oKNUZGNNdrx3vjsRN59atSudye6F36L482ZhzY4fEkO01VVzt3oE4Rlnt/bQ6PvDUKyCH+l83Xzrze9gGhKbKYVEjFyb4wspKmRd7VW200pS+R326v+ZntaibPMvEKSSFgDS9PnTQz/vwp5sWA8hw9ONG+zfDWTg0RyxgHlgkKTNInutWjr0K9L/GC+ntbA9zr21oIOqGHxpjLqSuI/qmjNCqO8ttfiPOObNzTUiiA1ayMHw9bT7wfGZ5vr1SujCyBqfexYOrG+WTRJNcCWYlxN1JeY4eBvEqMfDkLfPgN0TzVEYuIyAdwVkHs0HFJ2nHQDi7Uac5nIDWGoqZwy2b0I8FeGNerIIrZFQiX
+    properties :
+     x : 24
+     y : 403
+     width : 241
+     height : 20
+     anchor : 1
+     anchor_ratio_size_x : 0
+     tab_stop : 0
+     take_focus : 0
+    style : {}
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes :
+      -
+        code : |1+
+         
+         MonChamp = ProjetInfo(piNomProjet) + " " + GetAppVersion()
+        type : 14
  menu :
   name : _Menu
   identifier : 0x292573e513b5f221
