@@ -33,6 +33,7 @@ Translate entire documents with ease via DeepL’s powerful engine.
 
 ### Installation
 1. Simply download one of the released package.
+2. Optional: Install ffmpeg.exe in the same folder as the application executable for audio and video file splitting if needed.
 
 ## Usage
 1. Open TransCaption and load an SRT or SBV file to edit subtitles.
