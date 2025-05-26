@@ -21,7 +21,8 @@ project :
     generation_name : TransCaption.exe
     version :
      minor_version : 3
-     internal_generation_version : 41
+     generation_version : 1
+     internal_generation_version : 42
     icon_filename : .\TransCaption_icon.ico
     language : 2
     64bits : true
@@ -128,17 +129,17 @@ project :
      physical_name : .\CMasterDocument.wdc
      type : 4
    -
-     name : FI_Subtitles
-     identifier : 0x47fd781b00ff2afe
-     internal_properties : HwAAAB4AAAAhOZibBN8Jl1Z4kl4uMD63lrJIS4mu6WW5kKt26J96P/SmFX4FuuSswRRRmw6kndzBRg5fYb97vnyWsdo=
-     physical_name : .\FI_Subtitles.wdw
-     type : 8
-   -
      name : CSubtitle
      identifier : 0x47e5b17216f12659
      internal_properties : HwAAAB4AAABoNo6F8eaIGyMzHu5qwAriVKCyL1k1GOYP+wB1bOl4JPp5CgWT67zdgVIRVWdNojuhdfeqqfEgEG1r5w==
      physical_name : .\CSubtitle.wdc
      type : 4
+   -
+     name : FI_Subtitles
+     identifier : 0x47fd781b00ff2afe
+     internal_properties : HwAAAB4AAAAhOZibBN8Jl1Z4kl4uMD63lrJIS4mu6WW5kKt26J96P/SmFX4FuuSswRRRmw6kndzBRg5fYb97vnyWsdo=
+     physical_name : .\FI_Subtitles.wdw
+     type : 8
   other_elements : []
   array_of_analysis : []
   net_assemblies : []
